@@ -1,0 +1,427 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.kh.petmu.board.model.vo.*, com.kh.petmu.comment.model.vo.*, java.util.*"%>
+
+<%--vo임포트하고 board, comment list 가져오기 --%>
+
+<%
+	Board b = (Board)request.getAttribute("board");
+	ArrayList<Comment> coList = (ArrayList<Comment>)request.getAttribute("coList");
+	int cmtCount = (int)request.getAttribute("cmtCount");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PETMU : 병원 / 약국 이용 후기</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<link rel="stylesheet" href="/PetMu/resources/css/sideMenu.css" />
+<script src="/PetMu/resources/js/jquery-3.6.0.min.js"></script>
+
+<style>
+    header, footer{
+        background: rgb(143, 186, 214);
+        width : 1500px;
+        height: 100px;
+        margin: 0 auto;
+        font-size: 50pt;
+        text-align: center;
+    }
+
+    .main {
+        width : 1500px;
+        height : 1000px;
+        margin: 0 auto;
+        
+        
+    }
+    
+    .boardArea {
+    display : inline-block;
+    padding: 50px 0 0 30px;
+    height : 800px;
+    width : 1200px;
+        
+    }
+    
+	.postArea {
+	    border-bottom : 1px solid lightgray;
+	    padding-bottom : 10px;
+	}
+	
+	#tableArea {
+	    border-collapse: collapse;
+	}
+	
+	#tableArea th:first-child {
+	    text-align: left;
+	    font-size: 25px;
+	    width: 900px;
+	}
+	
+	#tableArea th:last-child {
+	    text-align: right;
+	    font-weight: normal;
+	}
+	
+	#tableArea td:first-child {
+	    font-weight: bold;
+	}
+	
+	#tableArea td {
+	    border-bottom : 1px solid lightgray;
+	    height : 35px;
+	}
+	
+	#tableArea span {
+		font-weight : normal;
+	}
+	
+	#content {
+	    border : 1px solid lightgray;
+	    padding: 20px 20px;
+	    border-radius: 5px;
+	    max-height: 1100px;
+   		overflow: auto;
+	}
+	
+	
+	#likeArea>span {
+		display: table-cell;
+		vertical-align: middle;
+		font-size : 18px;
+		font-weight : bold;
+		width : auto;
+		height : 35px;
+		padding : 0 10px;
+		border : 1px solid orange;
+		border-radius : 3px;
+		background : rgb(255, 244, 230);
+	}
+	
+	#likeArea i{
+	    padding-right : 7px;
+	}
+	
+	#likeArea>span:hover {
+		cursor:pointer;
+		color : white;
+		background : orange;
+	}
+	
+	#cmtCount {
+	    font-weight: bold;
+	}
+	
+	#cmtCount label {
+	    color : orange;
+	}
+	
+	.cmts {
+    border-bottom: 1px solid lightgray;
+	}
+	
+	.cmtHead>div{
+	    float: left;
+	}
+	
+	.cmtHead>span{
+	    float: right;
+	}
+	
+	.cmtHead i:hover {
+		cursor : pointer;
+	}
+	
+	.cmtBody {
+	    padding : 5px 0;
+	}
+	
+	.cmtFoot {
+	    text-align: right;
+	    font-size: 12px;
+	    color : gray;
+	    padding-bottom: 3px;
+	}
+	
+	
+	#cmtInsert {
+	    display: flex;
+	    align-items: center;
+	    padding : 20px 0;
+	}
+	
+	#ccontent {
+	    border : 2px solid lightgray;
+	    border-radius: 3px;
+	}
+	
+	#ccontent:focus {
+	    outline : none;
+	}
+	
+	#cmtBtn {
+	    margin-left: 10px;
+	    width:110px;
+	    height: 53px;
+	    background: rgb(241, 241, 241);
+	    border : 2px solid gray;
+	    border-radius: 3px;
+	    font-size: 17px;
+	    font-weight: bold;
+	}
+	
+	#cmtBtn:hover {
+	    background: rgb(241, 241, 241);
+	    cursor: pointer;
+	}
+	
+	#btnArea {
+		text-align : center;
+		padding-top : 15px;
+	}
+	
+	
+	#btnArea button:hover {
+		cursor : pointer;
+	}
+	
+	#goList {
+		font-size : 16px;
+		color : orange;
+		font-weight : bold;
+		width : 100px;
+		height : 40px;
+		background : rgb(231, 231, 231);
+		border : none;
+		border-radius : 3px;
+	}
+
+	#btnArea2 {
+		text-align : right;
+	}
+	
+	
+	#btnArea2 button:hover {
+		cursor : pointer;
+	}
+	
+	#btnArea2 button {
+		font-size : 13px;
+		font-weight : bold;
+		width : 50px;
+		height : 30px;
+		border : none;
+		border-radius : 3px;
+	}
+	
+	#goList2 {
+		color : orange;
+		background : rgb(231, 231, 231);
+
+	}
+	
+	#updateBtn2 {
+		color : white;
+		background : rgb(34, 170, 236);
+
+	}
+	
+	#deleteBtn2 {
+		color : white;
+		background : rgb(254, 54, 64);
+	}
+
+</style>
+</head>
+<body>
+    <header>header</header>
+    <div class="main">
+
+	<%@ include file="/views/common/sideMenu.jsp" %>	
+
+        <div class="boardArea">
+            <div id="boardTitle">
+                <h2><i class="far fa-edit"></i> 병원 / 약국 정보 공유</h2>
+            </div>
+            <div id="content">
+
+                <div class="postArea">
+                    <table id="tableArea">
+                            <tr>
+                                <th><%=b.getBtitle() %></th> <%--btitie 가져오기 --%>
+                            	<input type="hidden" name="bno" value="<%=b.getBno() %>" />
+                                <th colspan="3"><%=b.getBdate() %></th> <%--bDate 가져오기 --%>
+                            </tr>
+                            <tr>
+                                <td><%=b.getBwriterNick() %><span> (<%=b.getBwriterId() %>)</span></td> <%--bwriter 가져오기 --%>
+                                <td width="100px" align="right">조회수 <%=b.getBcount() %></td> <%--bcount 가져오기 --%>
+                                <td width="100px" align="right">추천수 <%=b.getLikeCount() %></td> <%--likeCount 가져오기 --%>
+                                <td width="90px" align="right">댓글 <%= cmtCount %></td> <%--cmtCount 가져오기 --%>
+                            </tr>
+                    </table>
+                    <br><br>
+                    <article> <%--bcontent 가져오기 --%>
+                        <%= b.getBcontent() %>
+                    </article>
+                    <br><br><br>
+    
+                    <div id="likeArea" align="center">
+                    	<span>
+	                        <i class="fas fa-thumbs-up"></i>
+	                        <span><%=b.getLikeCount() %> Like</span> <%--likecount 가져오기 --%>                    	
+                    	</span>
+                    </div>
+                    
+                    <div id="btnArea2">
+	                	<button id="goList2" onclick="goList();">목록</button>
+	                	
+	                	<%--m.getuserid와 b.getbwrtierid 일치하면 수정 삭제 버튼 --%>
+	                	
+	                	<button id="updateBtn2" onclick="update();">수정</button>
+	                	<button id="deleteBtn2" onclick="deleteOk();">삭제</button>
+                	
+               		 </div>
+                    
+                </div>
+                <br>
+                
+                <div class="cmtArea">
+                    <div id="cmtCount">
+                        댓글 <label><%= cmtCount %></label> <%--cmtCount 가져오기 --%>
+                    </div>
+        
+                    <div id="cmtInsert">
+                        <textarea name="ccontent" id="ccontent" cols="145" rows="3" style="resize: none;" placeholder="댓글을 남겨 보세요."></textarea>
+                        <button name="cmtBtn" id="cmtBtn" onclick="postCmt();">등록</button>
+                    </div>
+        			
+        			<div class="cmtListArea">
+        				<%--for each문으로 comment정보 담기 --%>
+      					<%for(Comment c : coList) {%>
+	                        <div class="cmts">
+	                            <div class="cmtHead">
+	                                <div>
+	                                	<input type="hidden" name="cno" value="<%= c.getCno() %>"/> <%--cno 가져오기 --%>
+	                                    <span style="font-size: 14px; font-weight: bold;"><%= c.getCwriterNick() %></span>
+	                                    <input type="hidden" name="cwriterId" value="<%= c.getCwriterId() %>"/> <%--cno 가져오기 --%>
+	                                </div>
+	                                <%--usernickname과 cwriter 일치하면 보이기 --%>
+	                                <span style="font-size: 13px;">
+	                                    <i class="far fa-edit" id="updateCmt"></i> &nbsp;
+	                                    <i class="far fa-trash-alt" id="deleteCmt"></i>
+	                                </span>
+	                            </div>
+	                            <br />
+	                            <div class="cmtBody" style="font-size: 14px;">
+	                                <%= c.getCcontent() %>
+	                            </div>
+	                            <div class="cmtFoot"><%= c.getCdate() %></div>
+	                        </div>
+                        <%} %>
+                    </div>
+                </div>
+                
+                <div id="btnArea">
+                	<button id="goList" onclick="goList();">목록</button>
+                </div>
+            </div>
+    	</div>
+    </div>
+    <footer>footer</footer>
+</body>
+
+<script>
+	// 댓글 입력 함수
+	function postCmt(){
+		<%-- locatoin.href="<%= request.getContextPath() %>/cmtInsert.co"; --%>
+		
+		var jsonData = {
+			bno : <%=b.getBno() %>,
+			cwriterId : "test01", /* m.getUserId */
+			cwriterNick : "아이언맨", /* m.getUserId */
+			ccontent : $('#ccontent').val()
+		}
+		
+		console.log(jsonData); // 전송할 데이터 확인
+		
+		$.ajax({
+			url : "<%= request.getContextPath() %>/cmtInsert.co",
+			type : "post",
+			data : jsonData,
+			success : function(data){
+				if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+					document.location.reload();
+				}
+			}, error : function(error){
+				alert("댓글 등록 실패");
+			}
+			
+		});
+	}
+	
+	// 댓글 수정 함수
+	
+	
+	
+	// 댓글 삭제 함수
+	$('#deleteCmt').click(function(){
+		if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
+	        // 취소(아니오) 버튼 클릭 시 이벤트
+	    } else {
+	        // 확인(예) 버튼 클릭 시 이벤트
+	        var cno = $(this).closest('div').find('input[name=cno]').val();
+	        
+	    	$.ajax({
+				url : "<%= request.getContextPath() %>/cmtDelete.co",
+				type : "post",
+				data : { cno },
+				success : function(data){
+					if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+						document.location.reload();
+					}
+				}, error : function(error){
+					alert("댓글 삭제 실패");
+				}
+				
+			});        
+	    }
+	});
+	
+	// 목록, 수정, 삭제 함수
+	function goList(){
+		location.href='<%= request.getContextPath()%>/selectList.bo?cate=3';
+	}
+	
+	function update(){
+		location.href='<%= request.getContextPath()%>/updateView.bo?cate=3&bno=<%=b.getBno() %>';
+	}
+	
+	function deleteOk(){
+     	if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
+	        // 취소(아니오) 버튼 클릭 시 이벤트
+	    } else {
+	        // 확인(예) 버튼 클릭 시 이벤트
+	    	location.href='<%= request.getContextPath()%>/delete.bo?cate=3&bno=<%=b.getBno() %>';        
+	    }
+		
+	}
+	
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
