@@ -16,7 +16,7 @@
 <title>PETMU : 병원 / 약국 이용 후기</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
-<script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 
 <style>
     header, footer{
@@ -290,7 +290,7 @@
                             <tr>
                                 <td><%=b.getBwriterNick() %><span> (<%=b.getBwriterId() %>)</span></td> <%--bwriter 가져오기 --%>
                                 <td width="100px" align="right">조회수 <%=b.getBcount() %></td> <%--bcount 가져오기 --%>
-                                <td width="100px" align="right">추천수 <%=b.getLikeCount() %></td> <%--likeCount 가져오기 --%>
+                                <td width="100px" align="right">추천수 <span class="likeCnt"><%=b.getLikeCount() %></span></td> <%--likeCount 가져오기 --%>
                                 <td width="90px" align="right">댓글 <%= cmtCount %></td> <%--cmtCount 가져오기 --%>
                             </tr>
                     </table>
@@ -301,9 +301,10 @@
                     <br><br><br>
     
                     <div id="likeArea" align="center">
-                    	<span>
+                    	<span id="likeBtn">
 	                        <i class="fas fa-thumbs-up"></i>
-	                        <span><%=b.getLikeCount() %> Like</span> <%--likecount 가져오기 --%>                    	
+	                        <span class="likeCnt"><%=b.getLikeCount() %></span> <%--likecount 가져오기 --%>
+	                        <span>Like</span>                    	
                     	</span>
                     </div>
                     
@@ -500,6 +501,37 @@
 		
 	}
 	
+	
+	// 게시글 좋아요 기능 함수
+	$('#likeBtn').click(function(){
+		
+		var bno = <%= b.getBno() %>;
+		var id = 'test01'; <%-- <%= m.getUserId() %> --%> 
+		
+		console.log(bno, id);
+		
+		if(!confirm("이 게시글을 추천 하시겠습니까?")){
+			// 취소 버튼 클릭시
+		} else {
+			/// 확인 버튼 클릭시
+			$.ajax({
+				url : "<%= request.getContextPath() %>/likeUpdate.do",
+				type : "post",
+				data : { bno, id },
+				success : function(data){
+					if(data.result == 1){
+						$('.likeCnt').html(data.like);
+					} else {
+						alert(data.text);
+					}
+				}, error : function(error){
+					alert("게시글 추천 실패");
+				}
+			});
+		}
+		
+		
+	});
 
 </script>
 </html>
