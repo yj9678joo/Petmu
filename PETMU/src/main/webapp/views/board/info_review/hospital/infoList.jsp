@@ -18,10 +18,10 @@
 <head>
     <meta charset="UTF-8">
     <title>PETMU : 병원 / 약국 정보</title>
-    <link rel="stylesheet" href="/PetMu/resources/css/sideMenu.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     
-    <script src="/PetMu/resources/js/jquery-3.6.0.min.js"></script>
+    <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <style>
     header, footer{
         background: rgb(143, 186, 214);

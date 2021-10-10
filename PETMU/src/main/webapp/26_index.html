@@ -1,20 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>petmu</title>
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/petcss.css">
+    <link rel="stylesheet" href="/resources/css/petcss.css">
 </head>
 
 <body>
 
     <header>
         <div id="logo">
-            <img src="<%= request.getContextPath()%>/resources/images/petmu.png" align="left" onclick="goHome();" width="130" height="46" id="logo">
+            <img src="/resources/images/petmu.png" align="left" onclick="goHome();" width="130" height="46" id="logo">
         </div>
 
         <div id="top_menu">
@@ -40,47 +37,47 @@
         <script>
 
             function memberJoin() {
-                location.href = "<%= request.getContextPath()%>/views/member/agreement_page.jsp";
+                location.href = "/PetMu/views/member/join.jsp";
             }
 
             function login() {
-                location.href = "<%= request.getContextPath()%>/views/member/login_page.jsp";
+                location.href = "/PetMu/views/member/login.jsp";
             }
 
             function logout() {
-                location.href = "<%= request.getContextPath()%>/logout.do";
+                location.href = "/PetMu/logout.do";
             }
 
             function myPage() {
-                location.href = "<%= request.getContextPath()%>/views/member/myPage_page.jsp";
+                location.href = "/PetMu/views/myPage/myPage.jsp";
             }
 
             function goHome() {
-                location.href = "<%= request.getContextPath()%>/index.jsp";
+                location.href = "/PetMu/index.jsp";
             }
 
             function hospiter() {
-                location.href = "<%= request.getContextPath()%>/hospiter.ho";
+                location.href = "/PetMu/hospiter.ho";
             }
 
             function information() {
-                location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3";
+                location.href = "/PetMu/information.if";
             }
 
             function freeboard() {
-                location.href = "<%=request.getContextPath()%>/selectList.fb?cate=1";
+                location.href = "/PetMu/freeboard.fb";
             }
 
             function myPet() {
-                location.href = "<%=request.getContextPath()%>/selectList.tn";
+                location.href = "/PetMu/myPet.mp";
             }
 
         </script>
     </header>
 
     <div id="best">
-        <div class="bestboard"><img class="bestphoto" src="<%= request.getContextPath()%>/resources/images/dog.jpg"></div>
-        <div class="bestboard"><img class="bestphoto" src="<%= request.getContextPath()%>/resources/images/dogcat.jpg"></div>
+        <div class="bestboard"><img class="bestphoto" src="/resources/images/dog.jpg"></div>
+        <div class="bestboard"><img class="bestphoto" src="/resources/images/dogcat.jpg"></div>
     </div>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -88,15 +85,15 @@
     <h2>FOCUS ON</h2>
 
     <div id="need">
-        <div class="NeedToKnow"><img class="NeedPhoto" src="<%= request.getContextPath()%>/resources/images/know1.png" onclick="know();"></div>
-        <div class="NeedToKnow"><img class="NeedPhoto" src="<%= request.getContextPath()%>/resources/images/know2.png" onclick="know();"></div>
-        <div class="NeedToKnow"><img class="NeedPhoto" src="<%= request.getContextPath()%>/resources/images/know3.png" onclick="know();"></div>
+        <div class="NeedToKnow"><img class="NeedPhoto" src="/resources/images/know1.png" onclick="know();"></div>
+        <div class="NeedToKnow"><img class="NeedPhoto" src="/resources/images/know2.png" onclick="know();"></div>
+        <div class="NeedToKnow"><img class="NeedPhoto" src="/resources/images/know3.png" onclick="know();"></div>
     </div>
 
     <br>
 
     <footer>
-        <img src="<%= request.getContextPath()%>/resources/images/petmu.png" align="center" width="65" height="23">
+        <img src="/resources/images/petmu.png" align="center" width="65" height="23">
         <p>COPYRIGHT © 2021 PETMU, ALL RIGHTS RESERVED. SEMIPROJECT ⎮ KH Academy reserved by Yongjoo, Minsu, Gichang,
             Jieun</p>
     </footer>

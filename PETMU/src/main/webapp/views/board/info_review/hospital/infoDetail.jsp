@@ -15,8 +15,8 @@
 <meta charset="UTF-8">
 <title>PETMU : 병원 / 약국 이용 후기</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-<link rel="stylesheet" href="/PetMu/resources/css/sideMenu.css" />
-<script src="/PetMu/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
+<script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 
 <style>
     header, footer{
@@ -117,7 +117,7 @@
 	    color : orange;
 	}
 	
-	.cmts {
+	[class*=cmts] {
     border-bottom: 1px solid lightgray;
 	}
 	
@@ -156,7 +156,7 @@
 	    border-radius: 3px;
 	}
 	
-	#ccontent:focus {
+	#ccontent:focus, #upCon:focus {
 	    outline : none;
 	}
 	
@@ -231,6 +231,40 @@
 		color : white;
 		background : rgb(254, 54, 64);
 	}
+	
+	.cmtUpdate {
+	    border-bottom: 1px solid lightgray;
+	    padding-top : 3px;
+	}
+	
+	.upHead>div{
+	    float: left;
+	}
+	
+	.upHead>span{
+	    float: right;
+	}
+	
+	
+	.upBody {
+	    padding : 5px 0;
+	}
+	
+	.upFoot {
+	    text-align: right;
+	    font-size: 12px;
+	    color : gray;
+	    padding-bottom: 3px;
+	}
+	
+	#cmtCon {
+	    border : 2px solid lightgray;
+	    border-radius: 3px;
+	}
+
+	
+	
+	
 
 </style>
 </head>
@@ -261,9 +295,9 @@
                             </tr>
                     </table>
                     <br><br>
-                    <article> <%--bcontent 가져오기 --%>
+                    <p> <%--bcontent 가져오기 --%>
                         <%= b.getBcontent() %>
-                    </article>
+                    </p>
                     <br><br><br>
     
                     <div id="likeArea" align="center">
@@ -299,7 +333,7 @@
         			<div class="cmtListArea">
         				<%--for each문으로 comment정보 담기 --%>
       					<%for(Comment c : coList) {%>
-	                        <div class="cmts">
+	                        <div class="cmts<%= c.getCno() %>">
 	                            <div class="cmtHead">
 	                                <div>
 	                                	<input type="hidden" name="cno" value="<%= c.getCno() %>"/> <%--cno 가져오기 --%>
@@ -308,13 +342,13 @@
 	                                </div>
 	                                <%--usernickname과 cwriter 일치하면 보이기 --%>
 	                                <span style="font-size: 13px;">
-	                                    <i class="far fa-edit" id="updateCmt"></i> &nbsp;
+	                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>');"></i> &nbsp;
 	                                    <i class="far fa-trash-alt" id="deleteCmt"></i>
 	                                </span>
 	                            </div>
 	                            <br />
 	                            <div class="cmtBody" style="font-size: 14px;">
-	                                <%= c.getCcontent() %>
+	                                <p id="cmtContent<%= c.getCno() %>", style="margin : 0px;"><%= c.getCcontent() %></p>
 	                            </div>
 	                            <div class="cmtFoot"><%= c.getCdate() %></div>
 	                        </div>
@@ -343,26 +377,85 @@
 			ccontent : $('#ccontent').val()
 		}
 		
-		console.log(jsonData); // 전송할 데이터 확인
-		
-		$.ajax({
-			url : "<%= request.getContextPath() %>/cmtInsert.co",
-			type : "post",
-			data : jsonData,
-			success : function(data){
-				if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
-					document.location.reload();
+		//console.log(jsonData); // 전송할 데이터 확인
+		if(!$('#ccontent').val()){
+			alert("댓글을 입력해주세요.");
+		} else {
+			$.ajax({
+				url : "<%= request.getContextPath() %>/cmtInsert.co",
+				type : "post",
+				data : jsonData,
+				success : function(data){
+					if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+						document.location.reload();
+					}
+				}, error : function(error){
+					alert("댓글 등록 실패");
 				}
-			}, error : function(error){
-				alert("댓글 등록 실패");
-			}
-			
-		});
+				
+			});
+		}
 	}
 	
 	// 댓글 수정 함수
 	
+	// 수정 아이콘 클릭시 수정 댓글창으로 변경
+	function updateCon(cno, nick, content){
+		var htmls = "";
+		
+		htmls += '<div class="cmtUpdate">';
+		htmls += '<div class="upHead">';
+		htmls += '<div>';
+		htmls += '<input type="hidden" id="upCno" value="' + cno + '"/> ';
+		htmls += '<span style="font-size: 14px; font-weight: bold;">';
+		htmls += nick;
+		htmls += '</span>';
+		htmls += '</div>';
+		htmls += '<span style="font-size: 13px;">';
+		htmls += '<button id="upBtn" onclick="sendCon();")>수정</button> &nbsp;';
+		htmls += '<button id="delBtn" onclick="document.location.reload();">취소</button>';
+		htmls += '</span>';
+		htmls += '</div>';
+		htmls += '<br>';
+		htmls += '<div class="upBody" style="font-size: 14px;">';
+		htmls += '<textarea name="upCon" id="upCon" cols="162" rows="3" style="resize: none;">';
+		htmls += content;
+		htmls += '</textarea>';
+		htmls += '</div>';
+		htmls += '<div class="upFoot">2021-10-08</div>';
+		htmls += '</div>';
+		
+		$('.cmts'+cno).replaceWith(htmls);
+		$('#upCon').focus();
+	}
 	
+	// 댓글 수정
+	function sendCon() {
+		var jsonData = {
+				cno : $('#upCno').val(),
+				ccontent : $('#upCon').val()
+			}
+			
+			//console.log(jsonData); // 전송할 데이터 확인
+			if(!$('#upCon').val()){
+				alert("댓글을 입력해주세요.");
+			} else {
+				$.ajax({
+					url : "<%= request.getContextPath() %>/cmtUpdate.co",
+					type : "post",
+					data : jsonData,
+					success : function(data){
+						if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+							document.location.reload();
+						}
+					}, error : function(error){
+						alert("댓글 등록 실패");
+					}
+					
+				});
+			}
+	}
+			
 	
 	// 댓글 삭제 함수
 	$('#deleteCmt').click(function(){

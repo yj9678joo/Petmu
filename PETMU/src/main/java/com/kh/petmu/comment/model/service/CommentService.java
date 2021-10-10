@@ -43,4 +43,20 @@ public class CommentService {
 		return result;
 	}
 
+	public int updateComment(int cno, String content) {
+		con = getConnection();
+		
+		int result = dao.updateComment(con, cno, content);
+		
+		if(result > 0 ) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 }

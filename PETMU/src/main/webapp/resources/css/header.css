@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+    header{
+        height: 200px;
+    }
+    
+    #logo {
+        position: absolute;
+        top: 23px;
+        left: 20px;
+    }
+
+    #top_menu {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+    }
+
+    .top{
+        float: left;
+        margin: 5px;
+    }
+
+    #serch {
+        position: absolute;
+        top: 60px;
+        left: 220px;
+    }
+
+    .serch {
+        width: 340px;
+        height: 25px;
+    }
+
+    .ser_button {
+        width: 60px;
+        height: 30px;
+    }
+
+    #menu{
+        position: absolute;
+        top: 110px;
+        font-size:20px;
+    }
+    .menu{
+        display: inline;
+        margin-left: 70px ;
+    }

@@ -72,6 +72,29 @@ public class CommentDAO {
 		return result;
 	}
 
+	public int updateComment(Connection con, int cno, String content) {
+		int result = 0;
+		PreparedStatement ps = null;
+		String sql = prop.getProperty("updateComment");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, content);
+			ps.setInt(2, cno);
+			
+			result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		}
+		
+		
+		return result;
+	}
+
 }
 
 
