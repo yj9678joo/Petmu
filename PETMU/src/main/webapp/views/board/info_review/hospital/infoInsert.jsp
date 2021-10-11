@@ -7,7 +7,8 @@
 <title>PETMU : 게시글 작성</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
-
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+ 
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
@@ -17,14 +18,6 @@
 
 
 <style>
-   	header, footer{
-   	background: rgb(143, 186, 214);
-   	width : 1500px;
-  	height: 100px;
-  	margin: 0 auto;
-  	font-size: 50pt;
-   	text-align: center;
-    }
 
     .main {
         width : 1500px;
@@ -36,7 +29,7 @@
     
     .boardArea {
     display : inline-block;
-    padding: 50px 0 0 30px;
+    padding-left: 30px;
     height : 800px;
     width : 1200px;
         
@@ -101,7 +94,7 @@
 
 </head>
 <body>
-<header>header</header>
+<%@ include file="/views/common/header.jsp" %>
     <div class="main">
 
         <%@include file="/views/common/sideMenu.jsp" %>
@@ -129,7 +122,7 @@
             </div>
     	</div>
     </div>
-    <footer>footer</footer>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 
 <script>

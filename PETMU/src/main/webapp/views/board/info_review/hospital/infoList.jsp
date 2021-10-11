@@ -20,7 +20,7 @@
     <title>PETMU : 병원 / 약국 정보</title>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    
+	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />   
     <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,14 +28,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-    header, footer{
-        background: rgb(143, 186, 214);
-        width : 1500px;
-        height: 100px;
-        margin: 0 auto;
-        font-size: 50pt;
-        text-align: center;
-    }
 
     .main {
         width : 1500px;
@@ -45,7 +37,7 @@
 
     .boardArea {
         display : inline-block;
-        padding: 50px 0 0 30px;
+        padding: 0 0 0 30px;
         width : 1200px;
         
     }
@@ -68,10 +60,6 @@
    	#listArea td {
    		height : 30px;
         border-bottom : 1px solid lightgray;
-    }
-    
-    #listArea td:hover {
-    	cursor:pointer;
     }
     
     #btnArea {
@@ -144,7 +132,7 @@
 </head>
 
 <body>
-    <header>header</header>
+    <%@ include file="/views/common/header.jsp" %>
     <div class="main">
 
 	<%@ include file="/views/common/sideMenu.jsp" %>	
@@ -219,7 +207,8 @@
 			<div id="searchFrm">
 				<select id="searchTarget" name="searchTarget">
 					<option value="title">제목</option>
-					<option value="writer">작성자(닉네임)</option>
+					<option value="writerId">작성자(ID)</option>
+					<option value="writerNick">작성자(닉네임)</option>
 				</select>
 				&nbsp;
 				<input id="bsearch" type="text" name="bsearch" 
@@ -230,7 +219,7 @@
 		</div>
 		
     </div>
-    <footer>footer</footer>
+     <%@ include file="/views/common/footer.jsp" %>
     
     
     <script>
@@ -241,7 +230,11 @@
     	}
     	
     	<%-- 게시글 td누르면 bno값들고 selectOne.bo로 이동--%>
-    	$('#listArea td').on('click', function(){
+    	$('#listArea td').mouseenter(function(){
+			$(this).parent().css({"background" : "#f2f2f2", "cursor" : "pointer"});
+		}).mouseout(function(){
+			$(this).parent().css({"background" : "white"});
+		}).on('click', function(){
     		var bno = $(this).parent().find('input').val();
     		location.href = "<%= request.getContextPath() %>/selectOne.bo?cate=3&bno=" + bno;
     	});

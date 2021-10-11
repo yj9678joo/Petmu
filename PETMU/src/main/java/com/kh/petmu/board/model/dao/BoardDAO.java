@@ -335,11 +335,40 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public int getWriterListCount(Connection con, int cateNo, String keyword) {
+	public int getWriterIdListCount(Connection con, int cateNo, String keyword) {
 		int result = 0;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = prop.getProperty("getWriterListCount");
+		String sql = prop.getProperty("getWriterIdListCount");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, cateNo);
+			ps.setString(2, keyword);
+			
+			rs = ps.executeQuery();
+			
+			//rs의 값 가져오기
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return result;
+	}
+	
+	public int getWriterNickListCount(Connection con, int cateNo, String keyword) {
+		int result = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getWriterNickListCount");
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -415,12 +444,12 @@ public class BoardDAO {
 		return list;
 	}
 
-	public ArrayList<Board> selectWriterList(Connection con, int cateNo, int currentPage, int limit, String keyword) {
+	public ArrayList<Board> selectWriterIdList(Connection con, int cateNo, int currentPage, int limit, String keyword) {
 		ArrayList<Board> list = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = prop.getProperty("selectWriterList");
+		String sql = prop.getProperty("selectWriterIdList");
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -466,6 +495,56 @@ public class BoardDAO {
 		return list;
 	}
 
+	public ArrayList<Board> selectWriterNickList(Connection con, int cateNo, int currentPage, int limit, String keyword) {
+		ArrayList<Board> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectWriterNickList");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, cateNo);
+			ps.setInt(2, endRow);
+			ps.setString(3, keyword);
+			ps.setInt(4, startRow);
+			
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				
+				b.setBno(rs.getInt("bno"));
+				b.setCateNo(rs.getInt("cate_no"));
+				b.setBwriterId(rs.getString("bwriter_id"));
+				b.setBwriterNick(rs.getString("bwriter_nick"));
+				b.setBtitle(rs.getString("btitle"));
+				b.setBcontent(rs.getString("bcontent"));
+				b.setBcount(rs.getInt("bcount"));
+				b.setBfile(rs.getString("bfile"));
+				b.setLikeCount(rs.getInt("likecount"));
+				b.setBdate(rs.getDate("bdate"));
+				b.setStatus(rs.getString("status"));
+
+				list.add(b);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		
+		return list;
+	}
 
 
 }

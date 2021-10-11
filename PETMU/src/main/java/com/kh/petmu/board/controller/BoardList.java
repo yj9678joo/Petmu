@@ -65,8 +65,10 @@ public class BoardList extends HttpServlet {
 			listCount = service.getListCount(cateNo);
 		} else if(target.equals("title") && keyword != null) {
 			listCount = service.getTitleListCount(cateNo, keyword);
-		} else if(target.equals("writer") && keyword != null) {
-			listCount = service.getWriterListCount(cateNo, keyword);
+		} else if(target.equals("writerId") && keyword != null) {
+			listCount = service.getWriterIdListCount(cateNo, keyword);
+		} else if(target.equals("writerNick") && keyword != null) {
+			listCount = service.getWriterNickListCount(cateNo, keyword);
 		}
 		
 		
@@ -89,8 +91,10 @@ public class BoardList extends HttpServlet {
 			list = service.selectList(cateNo, currentPage, limit);
 		} else if(target.equals("title") && keyword != null) {
 			list = service.selectTitleList(cateNo, currentPage, limit, keyword);
-		} else if(target.equals("writer") && keyword != null) {
-			list = service.selectWriterList(cateNo, currentPage, limit, keyword);
+		} else if(target.equals("writerId") && keyword != null) {
+			list = service.selectWriterIdList(cateNo, currentPage, limit, keyword);
+		} else if(target.equals("writerNick") && keyword != null) {
+			list = service.selectWriterNickList(cateNo, currentPage, limit, keyword);
 		}
 		
 		

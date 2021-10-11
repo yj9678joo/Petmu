@@ -144,9 +144,18 @@ public class BoardService {
 		return result;
 	}
 
-	public int getWriterListCount(int cateNo, String keyword) {
+	public int getWriterIdListCount(int cateNo, String keyword) {
 		con = getConnection();
-		int result = dao.getWriterListCount(con, cateNo, keyword);
+		int result = dao.getWriterIdListCount(con, cateNo, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+	
+	public int getWriterNickListCount(int cateNo, String keyword) {
+		con = getConnection();
+		int result = dao.getWriterNickListCount(con, cateNo, keyword);
 		
 		close(con);
 		
@@ -163,10 +172,20 @@ public class BoardService {
 		return list;
 	}
 
-	public ArrayList<Board> selectWriterList(int cateNo, int currentPage, int limit, String keyword) {
+	public ArrayList<Board> selectWriterIdList(int cateNo, int currentPage, int limit, String keyword) {
 		con = getConnection();
 		
-		ArrayList<Board> list = dao.selectWriterList(con, cateNo, currentPage, limit, keyword);
+		ArrayList<Board> list = dao.selectWriterIdList(con, cateNo, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+	
+	public ArrayList<Board> selectWriterNickList(int cateNo, int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<Board> list = dao.selectWriterNickList(con, cateNo, currentPage, limit, keyword);
 
 		close(con);
 		
