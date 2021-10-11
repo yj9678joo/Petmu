@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>PETMU : 병원 / 약국 정보</title>
+    <title>PETMU : 기타 장소 이용 후기</title>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />   
@@ -127,10 +127,11 @@
 		font-weight: bold;
 		color : orange;
 	}
-    
-    #searchBtn:hover {
-    	cursor : pointer;
+	
+   	#searchBtn:hover {
+   		cursor : pointer;
     }
+    
     
 </style>
 </head>
@@ -144,7 +145,7 @@
         <div class="boardArea">
             <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px; padding-bottom : 10px;">
            		<i class="far fa-edit"></i>
-                <label style="color : orange;"> 병원 / 약국 정보 공유</label>
+                <label style="color : orange;"> 기타 장소 이용 후기</label>
             </div>
     
             <div class="tableArea">
@@ -177,32 +178,31 @@
                 </table>
             </div>
     		<br />
-    		<%if(pi.getListCount() > 1) {%>
+    		<%if(pi.getListCount() != 0) {%>
 	            <div class="pagingArea" align="center">
-	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1&cate=3'"><<</button> <%--cate check --%>
+	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1&cate=8'"><<</button> <%--cate check --%>
 	    			<%-- currentPage, stardPage, endPage, listCount받아와서 페이징 --%>
 	    			<%if(currentPage <= 1) {%>
 	    			<button disabled><</button>
 	    			<%} else { %>
-	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1%>&cate=3'"><</button>
+	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1%>&cate=8'"><</button>
 	    			<%} %>
 	    			<%for(int p = startPage; p <= endPage; p++){ 
 	    				if(p ==currentPage){
 	    			%>
 	    				<button disabled style="color:orange;"><%=p %></button>
 	    				<%} else { %>
-	    				<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=p%>&cate=3'"><%=p%></button>
+	    				<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=p%>&cate=8'"><%=p%></button>
 	    				<%} %>
 	    			<%} %>
 	    			<%if(currentPage >= maxPage) {%>
 	    			<button disabled>></button>
 	    			<%} else { %>
-	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1%>&cate=3'">></button>
+	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1%>&cate=8'">></button>
 	    			<%} %>
-	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=maxPage %>&cate=3'">>></button>
+	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=maxPage %>&cate=8'">>></button>
 	            </div>
-	   		<%}%>  	       
-            
+            <%} %>
             <div id="btnArea" align="right">
             	<%--insert.bo로 이동 --%>
             	<%if(m != null) { %> 
@@ -228,13 +228,12 @@
 		
     </div>
      <%@ include file="/views/common/footer.jsp" %>
-     
     
 </body>
     <script>
  
     	function post(){
-	    	location.href = "views/board/info_review/hospital/infoInsert.jsp";
+	    	location.href = "views/board/info_review/etc/reviewInsert.jsp";
     	}
     	
     	<%-- 게시글 td누르면 bno값들고 selectOne.bo로 이동--%>
@@ -244,7 +243,7 @@
 			$(this).parent().css({"background" : "white"});
 		}).on('click', function(){
     		var bno = $(this).parent().find('input').val();
-    		location.href = "<%= request.getContextPath() %>/selectOne.bo?cate=3&bno=" + bno; <%--cate check --%>
+    		location.href = "<%= request.getContextPath() %>/selectOne.bo?cate=8&bno=" + bno; <%--cate check --%>
     	});
     	
     	function search(){
@@ -256,7 +255,7 @@
     		if(!keyword){
     			alert("검색어를 입력해주세요.")
     		} else {
-    			location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3&searchTarget=" + target + "&keyword=" + keyword; <%--cate check --%>
+    			location.href = "<%= request.getContextPath()%>/selectList.bo?cate=8&searchTarget=" + target + "&keyword=" + keyword; <%--cate check --%>
     		}
     	}
     </script>

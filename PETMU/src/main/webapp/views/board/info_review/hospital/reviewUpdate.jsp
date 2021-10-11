@@ -105,11 +105,11 @@
         <div class="boardArea">
             <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px;">
                 <label>게시글 수정</label>
-                <p style="font-size : 20px;">[병원 / 약국 정보 공유]</p>
+                <p style="font-size : 20px;">[병원 / 약국 이용 후기]</p>
             </div>
             <div id="content">
 
-                 <form action="<%= request.getContextPath() %>/update.bo?cate=3" method="post" id="frm"> <%--cate check --%>
+                 <form action="<%= request.getContextPath() %>/update.bo?cate=4" method="post" id="frm"> <%--cate check --%>
                 	<input type="hidden" name="bno" value="<%= b.getBno() %>" />
                     <div id="top">
 	                    <input type="text" name="btitle" id="btitle" placeholder=" 제목을 입력해 주세요." value="<%= b.getBtitle() %>">

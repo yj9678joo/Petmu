@@ -71,7 +71,7 @@ public class thumbSelectList extends HttpServlet {
 		
 		String page = "";
 		
-		if ( list != null && list.size() > 0) {
+		if ( list != null) {
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 
 			request.setAttribute("list", list);

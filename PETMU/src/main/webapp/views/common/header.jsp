@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.petmu.member.model.vo.*"%>
+	
+<%
+	Member m = (Member)session.getAttribute("member");
+%>	
 
 <header>
 	<div id="logo">
@@ -9,7 +13,11 @@
 
 	<div id="top_menu">
 		<div class="top" onclick="memberJoin();">회원가입 |</div>
-		<div class="top" onclick="login()">로그인 |</div>
+		<%if(m == null) { %>
+			<div class="top" onclick="login()">로그인 |</div>
+		<%} else { %>
+			<div class="top" onclick="logout()">로그아웃 |</div>
+		<%} %>	
 		<div class="top" onclick="myPage();">마이페이지</div>
 	</div>
 

@@ -109,7 +109,7 @@
             </div>
             <div id="content">
 
-                 <form action="<%= request.getContextPath() %>/update.bo?cate=3" method="post" id="frm"> <%--cate check --%>
+                 <form action="<%= request.getContextPath() %>/update.bo?cate=7" method="post" id="frm"> <%--cate check --%>
                 	<input type="hidden" name="bno" value="<%= b.getBno() %>" />
                     <div id="top">
 	                    <input type="text" name="btitle" id="btitle" placeholder=" 제목을 입력해 주세요." value="<%= b.getBtitle() %>">

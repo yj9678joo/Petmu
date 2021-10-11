@@ -106,9 +106,9 @@
             </div>
             <div id="content">
 
-                <form action="<%= request.getContextPath() %>/insert.bo?cate=3" method="post" id="frm">
-                	<input type="hidden" name="bwriterId" value="test01" /> <%--m.getid --%>
-                	<input type="hidden" name="bwriterNick" value="아이언맨" /> <%--m.getid --%>
+                <form action="<%= request.getContextPath() %>/insert.bo?cate=3" method="post" id="frm"> <%--cate check --%>
+                	<input type="hidden" name="bwriterId" value="<%= m.getUserId() %>" /> <%--m.getid --%>
+                	<input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" /> <%--m.getnickname --%>
                     <div id="top">
 	                    <input type="text" name="btitle" id="btitle" placeholder=" 제목을 입력해 주세요." required>
 	                    <button type="button" name="submitBtn" id="submitBtn">등록</button>                    

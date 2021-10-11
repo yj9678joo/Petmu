@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PETMU : 병원 / 약국 정보</title>
+<title>PETMU : 동반입장 장소 이용 후기</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
@@ -276,7 +276,7 @@
         <div class="boardArea">
             <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px; padding-bottom : 10px;">
            		<i class="far fa-edit"></i>
-                <label style="color : orange;"> 병원 / 약국 정보 공유</label>
+                <label style="color : orange;"> 동반입장 장소 이용 후기</label>
             </div>
 
             <div id="content">
@@ -533,11 +533,11 @@
 	
 	// 목록, 수정, 삭제 함수
 	function goList(){
-		location.href='<%= request.getContextPath()%>/selectList.bo?cate=3'; /* cate check */
+		location.href='<%= request.getContextPath()%>/selectList.bo?cate=6'; /* cate check */
 	}
 	
 	function update(){
-		location.href='<%= request.getContextPath()%>/updateView.bo?cate=3&bno=<%=b.getBno() %>'; /* cate check */
+		location.href='<%= request.getContextPath()%>/updateView.bo?cate=6&bno=<%=b.getBno() %>'; /* cate check */
 	}
 	
 	function deleteOk(){
@@ -545,7 +545,7 @@
 	        // 취소(아니오) 버튼 클릭 시 이벤트
 	    } else {
 	        // 확인(예) 버튼 클릭 시 이벤트
-	    	location.href='<%= request.getContextPath()%>/delete.bo?cate=3&bno=<%=b.getBno() %>';   /* cate check */     
+	    	location.href='<%= request.getContextPath()%>/delete.bo?cate=6&bno=<%=b.getBno() %>';   /* cate check */     
 	    }
 		
 	}

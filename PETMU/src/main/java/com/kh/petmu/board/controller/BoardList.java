@@ -71,7 +71,6 @@ public class BoardList extends HttpServlet {
 			listCount = service.getWriterNickListCount(cateNo, keyword);
 		}
 		
-		
 		// System.out.println("총 게시글 수 : " + listCount); 확인 완료!
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
@@ -97,10 +96,9 @@ public class BoardList extends HttpServlet {
 			list = service.selectWriterNickList(cateNo, currentPage, limit, keyword);
 		}
 		
+		String page2 = null;
 		
-		String page = "";
-		
-		if(list != null && list.size() > 0) {
+		if(list != null) {
 			PageInfo pi = new PageInfo(startPage, endPage, maxPage, currentPage, limit, listCount);
 
 			request.setAttribute("list", list);
@@ -108,26 +106,26 @@ public class BoardList extends HttpServlet {
 			
 			// 카테고리 번호에 맞는 게시글 페이지 등록
 			switch(cateNo) {
-				case 3 : page = "views/board/info_review/hospital/infoList.jsp";
+				case 3 : page2 = "views/board/info_review/hospital/infoList.jsp";
 						 break;
-				case 4 : page = "views/board/info_review/hospital/reviewList.jsp";
+				case 4 : page2 = "views/board/info_review/hospital/reviewList.jsp";
 						 break;
-				case 5 : page = "views/board/info_review/place/infoList.jsp";
+				case 5 : page2 = "views/board/info_review/place/infoList.jsp";
 				 		 break;
-				case 6 : page = "views/board/info_review/place/reviewList.jsp";
+				case 6 : page2 = "views/board/info_review/place/reviewList.jsp";
 						 break;
-				case 7 : page = "views/board/info_review/etc/infoList.jsp";
+				case 7 : page2 = "views/board/info_review/etc/infoList.jsp";
 				 		 break;
-				case 8 : page = "views/board/info_review/etc/reviewList.jsp";
+				case 8 : page2 = "views/board/info_review/etc/reviewList.jsp";
 						 break;		 
 						 
 			}
 		} else {
 			request.setAttribute("error-msg", "게시글 정보 불러오기에 실패했습니다.");
-			page = "views/common/errorPage.jsp";
+			page2 = "views/common/errorPage.jsp";
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		request.getRequestDispatcher(page2).forward(request, response);
 		
 	}
 
