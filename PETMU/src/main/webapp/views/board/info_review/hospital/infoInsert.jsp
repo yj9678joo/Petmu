@@ -11,6 +11,10 @@
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 
 <style>
    	header, footer{
@@ -46,7 +50,7 @@
     border : 1px solid lightgray;
     padding: 20px 20px;
     border-radius: 5px;
-    height: 787px;
+    height: 775px;
 	}
 
 	#btitle {
@@ -103,9 +107,9 @@
         <%@include file="/views/common/sideMenu.jsp" %>
 
         <div class="boardArea">
-            <div id="boardTitle">
-                <h2>게시글 작성</h2>
-                <p>[병원 / 약국 정보 공유]</p>
+            <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px;">
+                <label>게시글 작성</label>
+                <p style="font-size : 20px;">[병원 / 약국 정보 공유]</p>
             </div>
             <div id="content">
 

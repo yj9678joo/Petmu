@@ -54,7 +54,7 @@
             }
 
             function information() {
-                location.href = "<%= request.getContextPath()%>/views/board/info_review/hospital/infoList.jsp";
+            	location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3";
             }
 
             function freeboard() {

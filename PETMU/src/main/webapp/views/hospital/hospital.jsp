@@ -1,16 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="utf-8">
-	<title>PETMU : 우리동네병원찾기</title>
+	<title>다음 지도 API</title>
 </head>
 
 <body>
 	<div id="map" style="width:100%;height:100vh;"></div>
 
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b4a3224018a731e11156b2e5e5ca437e&libraries=clusterer"></script>
-	<script src="/SemiProject/views/hospiter.json"></script>
+	<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=b4a3224018a731e11156b2e5e5ca437e&libraries=clusterer"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {

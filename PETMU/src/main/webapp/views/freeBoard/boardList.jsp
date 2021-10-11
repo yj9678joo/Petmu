@@ -17,7 +17,7 @@
 <script src="/PetMu/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <!-- 타이틀로고 -->
-<link rel="shortcut icon" type="image/x-icon" href="/petmu/resources/images/petmu.ico" /> 
+<link rel="shortcut icon" type="image/x-icon" href="/PetMu/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
 <!-- 구글폰트 cdn -->

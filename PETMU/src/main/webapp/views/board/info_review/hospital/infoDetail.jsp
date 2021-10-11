@@ -16,7 +16,13 @@
 <title>PETMU : 병원 / 약국 이용 후기</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+
 
 <style>
     header, footer{
@@ -275,9 +281,11 @@
 	<%@ include file="/views/common/sideMenu.jsp" %>	
 
         <div class="boardArea">
-            <div id="boardTitle">
-                <h2><i class="far fa-edit"></i> 병원 / 약국 정보 공유</h2>
+            <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px; padding-bottom : 10px;">
+           		<i class="far fa-edit"></i>
+                <label style="color : orange;"> 병원 / 약국 정보 공유</label>
             </div>
+
             <div id="content">
 
                 <div class="postArea">
@@ -349,7 +357,7 @@
 	                            </div>
 	                            <br />
 	                            <div class="cmtBody" style="font-size: 14px;">
-	                                <p id="cmtContent<%= c.getCno() %>", style="margin : 0px;"><%= c.getCcontent() %></p>
+	                                <p id="cmtContent<%= c.getCno() %>" style="margin : 0px;"><%= c.getCcontent() %></p>
 	                            </div>
 	                            <div class="cmtFoot"><%= c.getCdate() %></div>
 	                        </div>

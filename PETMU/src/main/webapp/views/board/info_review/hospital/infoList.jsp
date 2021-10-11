@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     
     <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <style>
     header, footer{
         background: rgb(143, 186, 214);
@@ -41,7 +46,6 @@
     .boardArea {
         display : inline-block;
         padding: 50px 0 0 30px;
-        height : 800px;
         width : 1200px;
         
     }
@@ -106,6 +110,35 @@
     	cursor: pointer;
     }
     
+	
+	#searchFrm {
+		text-align: center;
+		display : flex;
+		width : 510px;
+		margin-left : auto;
+		margin-right : auto;
+	}
+	
+	#bsearch {
+		width:350px; 
+		height:26px;
+		border :1px solid grey;
+	}
+	
+	select {
+		width:80px; 
+		height:30px;
+		border : 1px solid grey;
+	}
+	
+	#searchBtn {
+	width:60px; 
+	height:32px; 
+	border:0; 
+	font-weight: bold;
+	color : orange;
+	}
+    
     
 </style>
 </head>
@@ -117,8 +150,9 @@
 	<%@ include file="/views/common/sideMenu.jsp" %>	
 
         <div class="boardArea">
-            <div id="boardTitle">
-                <h2><i class="far fa-edit"></i> 병원 / 약국 정보 공유</h2>
+            <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px; padding-bottom : 10px;">
+           		<i class="far fa-edit"></i>
+                <label style="color : orange;"> 병원 / 약국 정보 공유</label>
             </div>
     
             <div class="tableArea">
@@ -180,6 +214,21 @@
             	<button onclick="post();" id="postBtn">글쓰기</button>
             </div>
         </div>
+        
+       	<div id="searchArea">
+			<div id="searchFrm">
+				<select id="searchTarget" name="searchTarget">
+					<option value="title">제목</option>
+					<option value="writer">작성자(닉네임)</option>
+				</select>
+				&nbsp;
+				<input id="bsearch" type="text" name="bsearch" 
+						value="" placeholder="검색어를 입력해주세요"/>
+				&nbsp;
+				<input id="searchBtn" type="button" value="검색" onclick="search();"/>
+			</div>
+		</div>
+		
     </div>
     <footer>footer</footer>
     
@@ -196,6 +245,19 @@
     		var bno = $(this).parent().find('input').val();
     		location.href = "<%= request.getContextPath() %>/selectOne.bo?cate=3&bno=" + bno;
     	});
+    	
+    	function search(){
+    		var target = $('#searchTarget').val();
+    		var keyword = $('#bsearch').val();
+    		
+    		console.log(keyword);
+    		
+    		if(!keyword){
+    			alert("검색어를 입력해주세요.")
+    		} else {
+    			location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3&searchTarget=" + target + "&keyword=" + keyword;
+    		}
+    	}
     </script>
 </body>
 </html>

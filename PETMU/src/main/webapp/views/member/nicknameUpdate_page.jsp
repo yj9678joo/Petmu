@@ -13,7 +13,7 @@
     
 <body style="background-color:#f5f6f7">
 
-    <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%= request.getContextPath()%>/resources/petmu.png"alt="펫뮤" > </a><br><br> 닉네임 변경</h2>
+    <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%= request.getContextPath()%>/resources/images/petmu.png"alt="펫뮤" > </a><br><br> 닉네임 변경</h2>
 
 
     <hr>

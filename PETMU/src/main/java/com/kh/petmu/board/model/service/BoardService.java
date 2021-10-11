@@ -134,6 +134,46 @@ public class BoardService {
 		
 		return result;
 	}
+	
+	public int getTitleListCount(int cateNo, String keyword) {
+		con = getConnection();
+		int result = dao.getTitleListCount(con, cateNo, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getWriterListCount(int cateNo, String keyword) {
+		con = getConnection();
+		int result = dao.getWriterListCount(con, cateNo, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+	
+	public ArrayList<Board> selectTitleList(int cateNo, int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<Board> list = dao.selectTitleList(con, cateNo, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<Board> selectWriterList(int cateNo, int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<Board> list = dao.selectWriterList(con, cateNo, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+
+
 
 
 

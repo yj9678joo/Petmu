@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>petmu</title>
+    <title>PETMU</title>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/petcss.css">
 </head>
 
@@ -31,7 +31,7 @@
         <div id="menu">
             <nav>
                 <div class="menu" onclick="all();">≡ 전체 카테고리</div>
-                <div class="menu" onclick="hospiter();">우리동네 동물병원</div>
+                <div class="menu" onclick="hospital();">우리동네 동물병원</div>
                 <div class="menu" onclick="information();">후기⋅정보</div>
                 <div class="menu" onclick="freeboard();">자유게시판</div>
                 <div class="menu" onclick="myPet();">나의 댕냥 자랑</div>
@@ -59,8 +59,8 @@
                 location.href = "<%= request.getContextPath()%>/index.jsp";
             }
 
-            function hospiter() {
-                location.href = "<%= request.getContextPath()%>/hospiter.ho";
+            function hospital() {
+                location.href = "<%= request.getContextPath()%>/views/hospital/hospital.jsp";
             }
 
             function information() {

@@ -12,6 +12,9 @@
 <title>PETMU : 게시글 수정</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 
@@ -51,7 +54,7 @@
     border : 1px solid lightgray;
     padding: 20px 20px;
     border-radius: 5px;
-    height: 787px;
+    height: 775px;
 	}
 
 	#btitle {
@@ -107,9 +110,9 @@
         <%@include file="/views/common/sideMenu.jsp" %>
 
         <div class="boardArea">
-            <div id="boardTitle">
-                <h2>게시글 수정</h2>
-                <p>[병원 / 약국 정보 공유]</p>
+            <div id="boardTitle" style="font-family: 'Jua', sans-serif; font-size : 30px;">
+                <label>게시글 수정</label>
+                <p style="font-size : 20px;">[병원 / 약국 정보 공유]</p>
             </div>
             <div id="content">
 

@@ -35,6 +35,10 @@ public class BoardList extends HttpServlet {
 		ArrayList<Board> list = new ArrayList<>();
 		BoardService service = new BoardService();
 		
+		// 제목 or 작성자로 검색 데이터
+		String target = request.getParameter("searchTarget");
+		String keyword = request.getParameter("keyword");
+		
 		// request에 담긴 페이지 카테고리 번호
 		int cateNo = Integer.parseInt(request.getParameter("cate"));
 		
@@ -56,7 +60,15 @@ public class BoardList extends HttpServlet {
 		}
 		
 		// 게시글 총 수
-		int listCount = service.getListCount(cateNo);
+		int listCount = 0;
+		if(target == null && keyword == null) {
+			listCount = service.getListCount(cateNo);
+		} else if(target.equals("title") && keyword != null) {
+			listCount = service.getTitleListCount(cateNo, keyword);
+		} else if(target.equals("writer") && keyword != null) {
+			listCount = service.getWriterListCount(cateNo, keyword);
+		}
+		
 		
 		// System.out.println("총 게시글 수 : " + listCount); 확인 완료!
 		
@@ -73,7 +85,15 @@ public class BoardList extends HttpServlet {
 		
 		// -------------------------페이지 처리 끝----------------------------------- //
 		
-		list = service.selectList(cateNo, currentPage, limit);
+		if(target == null && keyword == null) {
+			list = service.selectList(cateNo, currentPage, limit);
+		} else if(target.equals("title") && keyword != null) {
+			list = service.selectTitleList(cateNo, currentPage, limit, keyword);
+		} else if(target.equals("writer") && keyword != null) {
+			list = service.selectWriterList(cateNo, currentPage, limit, keyword);
+		}
+		
+		
 		String page = "";
 		
 		if(list != null && list.size() > 0) {
