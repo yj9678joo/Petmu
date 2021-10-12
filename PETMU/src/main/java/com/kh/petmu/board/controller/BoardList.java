@@ -100,7 +100,8 @@ public class BoardList extends HttpServlet {
 		
 		if(list != null) {
 			PageInfo pi = new PageInfo(startPage, endPage, maxPage, currentPage, limit, listCount);
-
+			
+			request.setAttribute("cate", cateNo);
 			request.setAttribute("list", list);
 			request.setAttribute("pageInfo", pi);
 			

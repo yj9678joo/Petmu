@@ -1,12 +1,7 @@
 @charset "UTF-8";
-
-.sideMenu {
-        
-    }
     
 .sideMenu {
         height: 900px;
-        padding-right: 10px;
         float : left;
         border : 2px solid orange;
         border-radius : 4px;
@@ -16,6 +11,10 @@
 .sideMenu ul{
     list-style: none;
     padding-left : 15px;
+}
+
+#sideArea {
+	width : 200px;
 }
 
 #sideArea>ul>li {
@@ -31,6 +30,7 @@
     margin-top: 15px;
     font-size: 12pt;
     font-weight: normal;
+   	display : inline-block;
 
 }
 
@@ -43,7 +43,7 @@
     cursor: pointer;
 }
 
-.listTitle li:after {
+.nonFocus:after {
     display:block;
     content: '';
     border-bottom: solid 3px orange;  
@@ -52,7 +52,7 @@
 }
 
 
-.listTitle li:hover:after {
+.nonFocus:hover:after {
     transform: scaleX(1);
 }
 

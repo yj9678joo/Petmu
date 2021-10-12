@@ -136,8 +136,8 @@ table {
     		action="<%= request.getContextPath() %>/insert.tn" enctype="multipart/form-data">
         <div class="insertArea">
         <!-- 게시글 추가 영역 -->
-        <input type="hidden" name="bwriterId" value="user00" />
-        <input type="hidden" name="bwriterNick" value="군밤사세요" />
+        <input type="hidden" name="bwriterId" value="<%= m.getUserId() %>" />
+        <input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" />
         <input id="btitle" type="text" name="btitle" placeholder="제목을 입력해주세요" required maxlength="30"><br><br>
         <textarea name="bcontent" id="bcontent"></textarea>
     <br />

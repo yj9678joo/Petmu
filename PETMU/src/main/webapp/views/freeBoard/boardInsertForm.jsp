@@ -109,8 +109,8 @@ table {
 				<form id="insertForm" name="insertForm"
 					  action="<%= request.getContextPath() %>/insert.fb"
 				      method="post" enctype="multipart/form-data">
-                	  <input type="hidden" name="bwriterId" value="user00" /> <%--m.getid --%>
-                	  <input type="hidden" name="bwriterNick" value="군밤사세요" /> <%--m.getid --%>
+                	  <input type="hidden" name="bwriterId" value="<%= m.getUserId() %>" /> <%--m.getid --%>
+                	  <input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" /> <%--m.getid --%>
 				      <input type="text" id="btitle" name="btitle" placeholder="제목을 입력해주세요" 
 				      			required maxlength="30"><br>
 
