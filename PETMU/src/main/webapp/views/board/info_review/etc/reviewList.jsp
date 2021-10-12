@@ -74,7 +74,7 @@
                 </table>
             </div>
     		<br />
-    		<%if(pi.getListCount() != 0) {%>
+    		<%if(pi.getListCount() > 1) {%>
 	            <div class="pagingArea" align="center">
 	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1&cate=8'"><<</button> <%--cate check --%>
 	    			<%-- currentPage, stardPage, endPage, listCount받아와서 페이징 --%>
