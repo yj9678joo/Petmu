@@ -58,7 +58,7 @@
             }
 
             function hospiter() {
-                location.href = "<%= request.getContextPath()%>/hospiter.ho";
+                location.href = "<%= request.getContextPath()%>/views/hospital/hospital.jsp";
             }
 
             function information() {

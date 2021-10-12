@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .sideMenu {
-        display : inline-block;
+        
     }
     
 .sideMenu {
@@ -10,6 +10,7 @@
         float : left;
         border : 2px solid orange;
         border-radius : 4px;
+        
     }
 
 .sideMenu ul{

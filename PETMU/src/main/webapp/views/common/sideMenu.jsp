@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-	<nav class="sideMenu">
+	<div class="sideMenu">
 	    <div id="sideArea">
 	        <ul>
 	            <li class="listTitle"> 동물병원 / 약국
@@ -24,4 +24,4 @@
 	            </li>
 	        </ul>
 	    </div>
-	</nav>
+	</div>

@@ -21,118 +21,13 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />   
+	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardList.css" />
     <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-<style>
-
-    .main {
-        width : 1500px;
-        height : 1000px;
-        margin: 0 auto;
-    }
-
-    .boardArea {
-        display : inline-block;
-        padding: 0 0 0 30px;
-        width : 1200px;
-        
-    }
-
-
-    #listArea tbody td:nth-child(3) {
-        text-align: left;
-    }
-	
-	#listArea {
-		border-collapse : collapse;
-	}
-	
-    #listArea th {
-    	height : 30px;
-        border-top : 3px solid gray;
-        border-bottom : 1px solid lightgray;
-    }
-    
-   	#listArea td {
-   		height : 30px;
-        border-bottom : 1px solid lightgray;
-    }
-    
-    #btnArea {
-    	padding-right: 30px;
-    }
-
-    #postBtn {
-    	width : 80px;
-    	height : 35px;
-    	color : orange;
-        font-size: 12pt;
-        font-weight: bold;
-        background : rgb(231, 231, 231);
-        border: none;;
-        border-radius: 3px;
-    }
-
-    #postBtn:hover {
-        cursor: pointer;
-    }
-    
-    #listArea i {
-    	color : orange;
-    }
-    
-    .pagingArea button {
-    	color : gray;
-    	background : none;
-    	border : none;
-    	font-weight : bold;
-    	font-size : 13pt;
-    }
-    
-    .pagingArea button:hover {
-    	color : orange;
-    	cursor: pointer;
-    }
-    
-	
-	#searchFrm {
-		text-align: center;
-		display : flex;
-		width : 510px;
-		margin-left : auto;
-		margin-right : auto;
-		padding-top : 10px;
-	}
-	
-	#bsearch {
-		width:350px; 
-		height:26px;
-		border :1px solid grey;
-	}
-	
-	select {
-		width:80px; 
-		height:30px;
-		border : 1px solid grey;
-	}
-	
-	#searchBtn {
-		width:60px; 
-		height:32px; 
-		border:0; 
-		font-weight: bold;
-		color : orange;
-	}
-    
-    #searchBtn:hover {
-    	cursor : pointer;
-    }
-    
-</style>
 </head>
 
 <body>
