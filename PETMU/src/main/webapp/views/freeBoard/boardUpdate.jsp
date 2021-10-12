@@ -10,11 +10,11 @@
 <head>
 <meta charset="UTF-8">
 <title>PETMU : 게시글 수정</title>
-<script src="/petmu/resources/js/jquery-3.6.0.min.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="/petmu/resources/images/petmu.ico" />
+	href="<%= request.getContextPath()%>/resources/images/petmu.ico" />
 <!-- awesome 아이콘 cdn -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
@@ -27,9 +27,7 @@
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <style>
-body {
-	background-color: #E9E9E9;
-}
+
 .outer {
 	width: 1400px;
 	height: auto;

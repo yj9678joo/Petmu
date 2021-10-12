@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>PETMU : 게시글 작성</title>
-<script src="/petmu/resources/js/jquery-3.6.0.min.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <!-- 타이틀 로고 -->
-<link rel="shortcut icon" type="image/x-icon" href="/petmu/resources/images/petmu.ico" /> 
+<link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
 <!-- awesome 아이콘 cdn -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
@@ -20,9 +20,6 @@
 <!-- CK클래식 에디터 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <style>
-	body {
-		background-color : #E9E9E9;
-	}
 
 .outer {
 	width: 1400px;
@@ -112,8 +109,8 @@ table {
 				<form id="insertForm" name="insertForm"
 					  action="<%= request.getContextPath() %>/insert.fb"
 				      method="post" enctype="multipart/form-data">
-                	  <input type="hidden" name="bwriterId" value="test0" /> <%--m.getid --%>
-                	  <input type="hidden" name="bwriterNick" value="열매" /> <%--m.getid --%>
+                	  <input type="hidden" name="bwriterId" value="user00" /> <%--m.getid --%>
+                	  <input type="hidden" name="bwriterNick" value="군밤사세요" /> <%--m.getid --%>
 				      <input type="text" id="btitle" name="btitle" placeholder="제목을 입력해주세요" 
 				      			required maxlength="30"><br>
 

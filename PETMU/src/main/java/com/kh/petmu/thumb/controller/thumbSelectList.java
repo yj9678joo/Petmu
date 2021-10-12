@@ -35,6 +35,10 @@ public class thumbSelectList extends HttpServlet {
 		ArrayList<Thumbnail> list = new ArrayList<>();
 		ThumbnailService service = new ThumbnailService();
 		
+		// 제목 or 작성자로 검색 데이터
+		String target = request.getParameter("searchTarget");
+		String keyword = request.getParameter("keyword");
+		
 		// 1, 2, 3, 4, 5
 		int startPage, endPage;
 		
@@ -53,7 +57,20 @@ public class thumbSelectList extends HttpServlet {
 		}
 		
 		// 총 게시글 수 조회
-		int listCount = service.getListCount();
+		int listCount = 0;
+		
+		if(target == null && keyword == null) {
+			listCount = service.getListCount();
+			
+		} else if(target.equals("title") && keyword != null) {
+			listCount = service.getTitleListCount(keyword);
+			
+		} else if(target.equals("writerId") && keyword != null) {
+			listCount = service.getWriterIdListCount(keyword);
+			
+		} else if(target.equals("writerNick") && keyword != null) {
+			listCount = service.getWriterNickListCount(keyword);
+		}
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		
@@ -67,11 +84,24 @@ public class thumbSelectList extends HttpServlet {
 		}
 		
 		// ------------- 페이지 처리 끝! ----------- //
-		list = service.selectList(currentPage, limit);
+		
+		if(target == null && keyword == null) {
+			list = service.selectList(currentPage, limit);
+			
+		} else if(target.equals("title") && keyword != null) {
+			list = service.selectTitleList(currentPage, limit, keyword);
+			
+		} else if(target.equals("writerId") && keyword != null) {
+			list = service.selectWriterIdList(currentPage, limit, keyword);
+			
+		} else if(target.equals("writerNick") && keyword != null) {
+			list = service.selectWriterNickList(currentPage, limit, keyword);
+			
+		}
 		
 		String page = "";
 		
-		if ( list != null) {
+		if ( list != null ) {
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 
 			request.setAttribute("list", list);

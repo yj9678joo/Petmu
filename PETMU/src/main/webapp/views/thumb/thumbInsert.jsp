@@ -5,20 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>PETMU : 게시글 작성</title>
-<script src="/petmu/resources/js/jquery-3.6.0.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <!-- 타이틀로고 -->
-<link rel="shortcut icon" type="image/x-icon" href="/petmu/resources/images/petmu.ico" /> 
+<link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
 <!-- 구글폰트 cdn -->
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- CK클래식 에디터 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <style>
-body {
-	background-color: #E9E9E9;
-}
 section {
 	width: 1400px;
 	height: auto;
@@ -26,8 +25,7 @@ section {
 	color: black;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 50px;
-	margin-top: 40px;
+	padding: 30px;
 }
 
 .category {
@@ -47,7 +45,7 @@ i { /* 카테고리 아이콘 */
 
 #btitle {
 	font-size: 25px;
-	width: 1000px;
+	width: 1280px;
 	border: 0;
 	border-bottom: 1px solid grey;
 	padding: 10px;
@@ -57,7 +55,7 @@ i { /* 카테고리 아이콘 */
 	width: 1300px;
 	margin-left: 45px;
 	border: 1px solid lightgrey;
-	padding: 15px 15px 15px 15px;
+	padding: 25px 25px 25px 25px;
 }
 
 #insertArea {
@@ -68,11 +66,12 @@ i { /* 카테고리 아이콘 */
 	padding: 15px 15px 15px 15px;
 }
 
-#bcontent {
-	width: 1000px;
-	height: 150px;
-	padding: 10px;
-	resize: none;
+.ck.ck-editor {
+	max-width : 1300px;
+}
+
+.ck-editor__editable {
+	min-height : 300px;
 }
 
 table {
@@ -91,22 +90,22 @@ table {
 }
 
 #thumbTitle {
-	width : 100px;
+	width : 319px;
 	display : block;
 	text-align : center;
 	background-color : black;
 	color : white;
-	font-size : 13pt;
-	margin-top : -200px;
+	font-size : 14pt;
+	margin-top : -29px;
 	position : absolute;
 }
 
-#btnArea {
+.btnArea {
     display : block; 
 	text-align: center;
 }
 
-#btn {
+.btnArea button {
 	width: 100px;
 	padding: 10px;
 	border: 0;
@@ -116,8 +115,7 @@ table {
 	font-size: 15px;
 }
 
-#btn:hover {
-	opacity: 0.5;
+.btnArea button:hover {
 	cursor: pointer;
 }
 </style>
@@ -134,38 +132,38 @@ table {
 		</div>
 		
 	<div id="outline">
-    <form action="<%= request.getContextPath() %>/insert.tn"
-			  method="post" enctype="multipart/form-data">
+    <form id="insertForm" name="insertForm" method="post"
+    		action="<%= request.getContextPath() %>/insert.tn" enctype="multipart/form-data">
         <div class="insertArea">
         <!-- 게시글 추가 영역 -->
-        <input type="hidden" name="bwriterId" value="test0" />
-        <input type="hidden" name="bwriterNick" value="열매" />
+        <input type="hidden" name="bwriterId" value="user00" />
+        <input type="hidden" name="bwriterNick" value="군밤사세요" />
         <input id="btitle" type="text" name="btitle" placeholder="제목을 입력해주세요" required maxlength="30"><br><br>
-        <textarea name="bcontent" id="bcontent" placeholder="내용을 입력해주세요" maxlength="300"></textarea>
+        <textarea name="bcontent" id="bcontent"></textarea>
     <br />
     <table> 
         <tr>
             <td>
                 <div id="titleImgArea">
-                    <img id="titleImg" width="250" height="200">
+                    <img id="titleImg" width="319" height="250">
                     <span id="thumbTitle">대표사진</span>
                 </div>
             </td>
             <td>
                 <div id="contentImgArea1">
-                    <img id="contentImg1" width="250" height="200">
+                    <img id="contentImg1" width="319" height="250">
                 </div>
             </td>
             <td>
                 <div id="contentImgArea2">
-                    <img id="contentImg2" width="250" height="200">
+                    <img id="contentImg2" width="319" height="250">
                 </div>
             </td>
             <td>
                 <div id="contentImgArea3">
-                    <img id="contentImg3" width="250" height="200">
+                    <img id="contentImg3" width="319" height="250">
                 </div>
-            </td>
+            </td>         
         </tr>
     </table>
     </div>
@@ -181,15 +179,48 @@ table {
     <br /><br />
 
         <div class="btnArea">
-            <button id="btn" type="submit">작성 완료</button>
-            <button id="btn" type="reset"
+            <button id="submitBtn" type="submit">게시글 등록</button> &nbsp;
+            <button id="cancelBtn" type="reset"
             	onclick="location.href='<%=request.getContextPath()%>/selectList.tn'">작성 취소</button>
         </div>
     </form>
     </div>
     
 	</section>		
-	<script>
+
+	<br />
+	<%@ include file="../common/footer.jsp" %>
+</body>
+<script>
+// CK에디터, 작성버튼 함수
+	var eidtor
+	ClassicEditor
+	   .create( document.querySelector( '#bcontent' ) )
+	   .then( newEditor => {
+	       editor = newEditor;
+	   } )
+	   .catch( error => {
+	       console.error( error );
+	   } );
+	
+	
+	document.querySelector( '#submitBtn' ).addEventListener( 'click', () => {
+	    var editorData = editor.getData();
+	    var btitle = document.querySelector( '#btitle' ).value;
+	    
+	    console.log(btitle);
+	    console.log(editorData);
+	    
+	    if(!btitle) {
+	    	alert("제목을 입력해 주세요.");
+	    } else if(!editorData) {
+	    	alert("내용을 입력해 주세요.");
+	    } else {
+	    	document.querySelector( '#insertForm' ).submit();
+	    }
+	    
+	    
+	} );
 		// 사진 게시글 미리보기 기능 구현
 		$(function(){
 			$('#titleImgArea').click(function(){
@@ -234,10 +265,6 @@ table {
 			}	
 		}
 	</script>
-
-	<br />
-	<%@ include file="../common/footer.jsp" %>
-</body>
 </html>
 
 

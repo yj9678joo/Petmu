@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.freeBoard.model.vo.freeBoard;
 import com.kh.petmu.thumb.model.dao.ThumbnailDAO;
 import com.kh.petmu.thumb.model.vo.Attachment;
@@ -177,6 +178,85 @@ public class ThumbnailService {
 		
 		return result;
 	}
+
+
+public ArrayList<Comment> selectCoList(int bno) {
+	con = getConnection();
+	
+	ArrayList<Comment> cl = dao.selectCoList(con, bno);
+	
+	close(con);
+	
+	return cl;
+}
+
+public int getCmtCount(int bno) {
+	con = getConnection();
+	
+	int result = dao.getCmtCount(con, bno);
+	
+	close(con);
+	
+	return result;
+}
+
+public int getTitleListCount(String keyword) {
+	con = getConnection();
+	int result = dao.getTitleListCount(con, keyword);
+	
+	close(con);
+	
+	return result;
+}
+
+public int getWriterIdListCount(String keyword) {
+	con = getConnection();
+	int result = dao.getWriterIdListCount(con, keyword);
+	
+	close(con);
+	
+	return result;
+}
+
+public int getWriterNickListCount(String keyword) {
+	con = getConnection();
+	int result = dao.getWriterNickListCount(con, keyword);
+	
+	close(con);
+	
+	return result;
+}
+
+public ArrayList<Thumbnail> selectTitleList(int currentPage, int limit, String keyword) {
+	con = getConnection();
+	
+	ArrayList<Thumbnail> list = dao.selectTitleList(con, currentPage, limit, keyword);
+
+	close(con);
+	
+	return list;
+}
+
+public ArrayList<Thumbnail> selectWriterIdList(int currentPage, int limit, String keyword) {
+	con = getConnection();
+	
+	ArrayList<Thumbnail> list = dao.selectTitleList(con, currentPage, limit, keyword);
+
+	close(con);
+	
+	return list;
+}
+
+public ArrayList<Thumbnail> selectWriterNickList(int currentPage, int limit, String keyword) {
+	con = getConnection();
+	
+	ArrayList<Thumbnail> list = dao.selectTitleList(con, currentPage, limit, keyword);
+
+	close(con);
+	
+	return list;
+}
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.kh.petmu.freeBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.petmu.freeBoard.model.service.BoardService;
+import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.freeBoard.model.vo.freeBoard;
 
 /**
@@ -35,13 +37,18 @@ public class BoardSelectOne extends HttpServlet {
 		BoardService service = new BoardService();
 		
 		freeBoard fb = service.selectOne(bno);
+		ArrayList<Comment> coList = service.selectCoList(bno);
 		
-		System.out.println("[BNO : " + bno );
+		int cmtCount = service.getCmtCount(bno);
+		
+		// System.out.println("[BNO : " + bno );
 		
 		String page = "";
 		
 		if( fb != null ) {
 			request.setAttribute("freeBoard", fb);
+			request.setAttribute("coList", coList);
+			request.setAttribute("cmtCount", cmtCount);
 			
 			page = "views/freeBoard/boardDetail.jsp";
 		} else {

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.kh.petmu.comment.model.vo.Comment;
+import com.kh.petmu.freeBoard.model.vo.freeBoard;
 import com.kh.petmu.thumb.model.vo.Attachment;
 import com.kh.petmu.thumb.model.vo.Thumbnail;
 
@@ -140,7 +142,7 @@ public class ThumbnailDAO {
 		PreparedStatement ps = null;
 		String sql = prop.getProperty("insertAttachment");
 		
-		System.out.println("[DAO] : attachment = " + attachment);
+		// System.out.println("[DAO] : attachment = " + attachment);
 		
 		try {
 			ps = con.prepareStatement(sql);
@@ -356,9 +358,294 @@ public class ThumbnailDAO {
 	}
 
 
+public ArrayList<Comment> selectCoList(Connection con, int bno) {
+	ArrayList<Comment> cl = new ArrayList<>();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	String sql = prop.getProperty("selectCoList");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, bno);
+		
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Comment co = new Comment();
+			
+			co.setCno(rs.getInt("cno"));
+			co.setBno(rs.getInt("bno"));
+			co.setCwriterId(rs.getString("cwriter_id"));
+			co.setCwriterNick(rs.getString("cwriter_nick"));
+			co.setCcontent(rs.getString("ccontent"));
+			co.setCdate(rs.getDate("cdate"));
+			co.setStatus(rs.getString("status"));
+			
+			cl.add(co);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+		
+	return cl;
 }
 
+public int getCmtCount(Connection con, int bno) {
+	int result = 0;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	String sql = prop.getProperty("getCmtCount");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, bno);
+		
+		rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return result;
+}
 
+public int getTitleListCount(Connection con, String keyword) {
+	int result = 0;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	String sql = prop.getProperty("getTitleListCount");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		
+		rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return result;
+}
+
+public int getWriterIdListCount(Connection con, String keyword) {
+	int result = 0;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	String sql = prop.getProperty("getWriterIdListCount");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		
+		rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return result;
+}
+
+public int getWriterNickListCount(Connection con, String keyword) {
+	int result = 0;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	String sql = prop.getProperty("getWriterNickListCount");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setString(1, keyword);
+		
+		rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return result;
+}
+
+public ArrayList<Thumbnail> selectTitleList(Connection con, int currentPage, int limit, String keyword) {
+	ArrayList<Thumbnail> list = new ArrayList<>();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	String sql = prop.getProperty("selectTitleList");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		
+		ps.setInt(1, endRow);
+		ps.setString(2, keyword);
+		ps.setInt(3, startRow);
+		
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Thumbnail tn = new Thumbnail();
+			
+			tn.setBno( rs.getInt("bno"));
+			tn.setcateNo( rs.getInt("cate_No"));
+			tn.setbwriterId( rs.getString("bwriter_Id"));
+			tn.setbwriterNick( rs.getString("bwriter_Nick"));
+			tn.setbtitle( rs.getString("btitle"));
+			tn.setBcontent( rs.getString("bcontent"));
+			tn.setBcount( rs.getInt("bcount"));
+			tn.setBfile( rs.getString("changename"));
+			tn.setlikeCount( rs.getInt("likeCount"));
+			tn.setBdate( rs.getDate("bdate"));	
+			tn.setStatus(rs.getString("status"));
+			
+			list.add(tn);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return list;
+}
+
+public ArrayList<Thumbnail> selectWriterIdList(Connection con, int currentPage, int limit, String keyword) {
+	ArrayList<Thumbnail> list = new ArrayList<>();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	String sql = prop.getProperty("selectWriterIdList");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		
+		ps.setInt(1, endRow);
+		ps.setString(2, keyword);
+		ps.setInt(3, startRow);
+		
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Thumbnail tn = new Thumbnail();
+			
+			tn.setBno( rs.getInt("bno"));
+			tn.setcateNo( rs.getInt("cate_No"));
+			tn.setbwriterId( rs.getString("bwriter_Id"));
+			tn.setbwriterNick( rs.getString("bwriter_Nick"));
+			tn.setbtitle( rs.getString("btitle"));
+			tn.setBcontent( rs.getString("bcontent"));
+			tn.setBcount( rs.getInt("bcount"));
+			tn.setBfile( rs.getString("changename"));
+			tn.setlikeCount( rs.getInt("likeCount"));
+			tn.setBdate( rs.getDate("bdate"));	
+			tn.setStatus(rs.getString("status"));
+			
+			list.add(tn);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return list;
+}
+
+public ArrayList<Thumbnail> selectWriterNickList(Connection con, int currentPage, int limit, String keyword) {
+	ArrayList<Thumbnail> list = new ArrayList<>();
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	String sql = prop.getProperty("selectWriterNickList");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		
+		ps.setInt(1, endRow);
+		ps.setString(2, keyword);
+		ps.setInt(3, startRow);
+		
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Thumbnail tn = new Thumbnail();
+			
+			tn.setBno( rs.getInt("bno"));
+			tn.setcateNo( rs.getInt("cate_No"));
+			tn.setbwriterId( rs.getString("bwriter_Id"));
+			tn.setbwriterNick( rs.getString("bwriter_Nick"));
+			tn.setbtitle( rs.getString("btitle"));
+			tn.setBcontent( rs.getString("bcontent"));
+			tn.setBcount( rs.getInt("bcount"));
+			tn.setBfile( rs.getString("changename"));
+			tn.setlikeCount( rs.getInt("likeCount"));
+			tn.setBdate( rs.getDate("bdate"));	
+			tn.setStatus(rs.getString("status"));
+			
+			list.add(tn);
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(ps);
+	}
+	
+	return list;
+}
+}
 
 
 

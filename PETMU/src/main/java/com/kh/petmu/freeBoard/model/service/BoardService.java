@@ -5,6 +5,7 @@ import static com.kh.petmu.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.petmu.board.model.vo.Board;
 import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.freeBoard.model.dao.BoardDAO;
 import com.kh.petmu.freeBoard.model.vo.freeBoard;
@@ -135,6 +136,64 @@ public class BoardService {
 		
 		return result;
 	}
+
+	public int getTitleListCount(String keyword) {
+		con = getConnection();
+		int result = dao.getTitleListCount(con, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getWriterIdListCount(String keyword) {
+		con = getConnection();
+		int result = dao.getWriterIdListCount(con, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getWriterNickListCount(String keyword) {
+		con = getConnection();
+		int result = dao.getWriterNickListCount(con, keyword);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<freeBoard> selectTitleList(int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<freeBoard> list = dao.selectTitleList(con, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectWriterIdList(int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<freeBoard> list = dao.selectWriterIdList(con, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectWriterNickList(int currentPage, int limit, String keyword) {
+		con = getConnection();
+		
+		ArrayList<freeBoard> list = dao.selectWriterNickList(con, currentPage, limit, keyword);
+
+		close(con);
+		
+		return list;
+	}
+
 
 }
 

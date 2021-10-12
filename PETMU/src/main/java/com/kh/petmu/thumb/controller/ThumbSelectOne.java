@@ -1,6 +1,7 @@
 package com.kh.petmu.thumb.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.thumb.model.service.ThumbnailService;
 
 /**
@@ -34,7 +36,9 @@ public class ThumbSelectOne extends HttpServlet {
 		
 		HashMap<String, Object> thumb;
 		ThumbnailService service = new ThumbnailService();
+		ArrayList<Comment> coList = service.selectCoList(bno);
 		
+		int cmtCount = service.getCmtCount(bno);
 		thumb = service.selectOne(bno);
 		
 		String page="";
@@ -42,6 +46,8 @@ public class ThumbSelectOne extends HttpServlet {
 		if( thumb != null && thumb.get("thumb") != null ) {
 			request.setAttribute("thumbnail", thumb.get("thumb"));
 			request.setAttribute("fileList", thumb.get("list"));
+			request.setAttribute("coList", coList);
+			request.setAttribute("cmtCount", cmtCount);
 			
 			page="views/thumb/thumbDetail.jsp";
 		} else {

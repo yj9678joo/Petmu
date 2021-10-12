@@ -20,17 +20,17 @@
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <!-- 타이틀로고 -->
-<link rel="shortcut icon" type="image/x-icon" href="/petmu/resources/images/petmu.ico" /> 
+<link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
 <!-- 구글폰트 cdn -->
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- CK클래식 에디터 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 <style>
-body {
-	background-color: #E9E9E9;
-}
+
 section {
 	width: 1400px;
 	height: auto;
@@ -39,7 +39,6 @@ section {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 50px;
-	margin-top: 40px;
 }
 
 .category {
@@ -59,7 +58,7 @@ i { /* 카테고리 아이콘 */
 
 #btitle { /* 게시글 제목 */
 	font-size: 25px;
-	width: 1000px;
+	width: 1280px;
 	border: 0;
 	border-bottom: 1px solid grey;
 	padding: 10px;
@@ -73,18 +72,15 @@ i { /* 카테고리 아이콘 */
 }
 
 #updateArea { /* 입력폼(제목,내용,사진) */
-	width: 500px;
-	width: 1300px;
-	margin-left: 45px;
-	border: 1px solid lightgrey;
-	padding: 15px 15px 15px 15px;
+	margin-left: 0px;
 }
 
-#bcontent { /* 내용 */
-	width: 1000px;
-	height: 150px;
-	padding: 10px;
-	resize: none;
+.ck.ck-editor {
+	max-width : 1300px;
+}
+
+.ck-editor__editable {
+	min-height : 300px;
 }
 
 table { /* 사진 */
@@ -102,14 +98,14 @@ table { /* 사진 */
 	cursor: pointer;
 }
 
-#thumbTitle { /* 대표사진 span 태그 */
-	width : 100px;
+#thumbTitle {
+	width : 319px;
 	display : block;
 	text-align : center;
 	background-color : black;
 	color : white;
-	font-size : 13pt;
-	margin-top : -200px;
+	font-size : 14pt;
+	margin-top : -29px;
 	position : absolute;
 }
 
@@ -118,7 +114,7 @@ table { /* 사진 */
 	text-align: center;
 }
 
-#btn {
+.btnArea button {
 	width: 100px;
 	padding: 10px;
 	border: 0;
@@ -128,8 +124,7 @@ table { /* 사진 */
 	font-size: 15px;
 }
 
-#btn:hover {
-	opacity: 0.5;
+.btnArea button:hover {
 	cursor: pointer;
 }
 </style>
@@ -144,18 +139,18 @@ table { /* 사진 */
 		</div>
 		
 		<div id="outline">
-		<form action="/petmu/update.tn" method="post" enctype="multipart/form-data">
+		<form id="updateForm" action="<%= request.getContextPath() %>/update.tn" method="post" enctype="multipart/form-data">
 			<div id="updateArea"> 
 				<!-- 게시글 수정 영역 -->
 				<input type="hidden" name="bno" value="<%= t.getBno() %>"/>
 				<input type="text" id="btitle" name="btitle" value="<%= t.getbtitle() %>"/><br><br>
-				<textarea name="bcontent" id="bcontent" ><%= t.getBcontent() %></textarea>
-				
+				<textarea name="bcontent" id="bcontent"><%= t.getBcontent() %></textarea>
+				<br />
 				<table>
 					<tr>
 						<td>
 							<div id="titleImgArea">
-								<img id="titleImg" width="250" height="200"
+								<img id="titleImg" width="319" height="250"
 								 src="<%= request.getContextPath()%>/resources/thumbFiles/<%= titleImg.getChangename() %>">           
 								<span id="thumbTitle">대표사진</span>
 							</div>
@@ -164,10 +159,10 @@ table { /* 사진 */
 						<td>
 							<div id="contentImgArea1">
 							<% if (detailImg1.getChangename() != null) { %>
-								<img id="contentImg1" width="250" height="200"
+								<img id="contentImg1" width="319" height="250"
 								     src="<%=request.getContextPath() %>/resources/thumbFiles/<%= detailImg1.getChangename() %>">
 							<% } else { %>
-								<img id="contentImg1" width="250" height="200" src="<%= request.getContextPath() %>/resources/images/no-image.png">
+								<img id="contentImg1" width="319" height="250" src="<%= request.getContextPath() %>/resources/images/no-image.png">
 							<% } %>
 							</div>
 						</td>
@@ -175,10 +170,10 @@ table { /* 사진 */
 						<td>
 							<div id="contentImgArea2">
 							<% if (detailImg2.getChangename() != null) { %>
-								<img id="contentImg2" width="250" height="200"
+								<img id="contentImg2" width="319" height="250"
 									src="<%=request.getContextPath() %>/resources/thumbFiles/<%= detailImg2.getChangename() %>">
 							<% } else { %>
-								<img id="contentImg2" width="250" height="200" src="<%= request.getContextPath() %>/resources/images/no-image.png">
+								<img id="contentImg2" width="319" height="250" src="<%= request.getContextPath() %>/resources/images/no-image.png">
 							<% } %>
 							</div>
 						</td>
@@ -186,10 +181,10 @@ table { /* 사진 */
 						<td>
 							<div id="contentImgArea3">
 							<% if (detailImg3.getChangename() != null) { %>
-								<img id="contentImg3" width="250" height="200"
+								<img id="contentImg3" width="319" height="250"
 									src="<%=request.getContextPath() %>/resources/thumbFiles/<%= detailImg3.getChangename() %>">
 							<% } else { %>
-								<img id="contentImg3" width="250" height="200" src="<%= request.getContextPath() %>/resources/images/no-image.png">
+								<img id="contentImg3" width="319" height="250" src="<%= request.getContextPath() %>/resources/images/no-image.png">
 							<% } %>
 							</div>
 						</td>
@@ -208,8 +203,8 @@ table { /* 사진 */
 			<br><br>
 			
 			<div class="btnArea">
-				<button id="btn" type="submit">수정 완료</button> &nbsp;
-				<button id="btn" type="button" onclick="goDetail();">수정 취소</button>
+				<button id="updateBtn" type="submit">수정 완료</button> &nbsp;
+				<button id="cancelBtn" type="button" onclick="goDetail();">수정 취소</button>
 			</div>
 			
 		</form>
@@ -220,11 +215,42 @@ table { /* 사진 */
 	<%@ include file="../common/footer.jsp" %>
 </body>
 		<script>
-
+		// 수정취소 버튼
 		function goDetail(){
 			location.href="<%= request.getContextPath()%>/selectOne.tn?bno=<%= t.getBno() %>";
 		}
-	
+		
+		// CK에디터, 작성버튼 함수
+		var eidtor
+		ClassicEditor
+		   .create( document.querySelector( '#bcontent' ) )
+		   .then( newEditor => {
+		       editor = newEditor;
+		   } )
+		   .catch( error => {
+		       console.error( error );
+		   } );
+		
+		
+		document.querySelector( '#updateBtn' ).addEventListener( 'click', () => {
+		    var editorData = editor.getData();
+		    var btitle = document.querySelector( '#btitle' ).value;
+		    
+		    console.log(btitle);
+		    console.log(editorData);
+		    
+		    if(!btitle) {
+		    	alert("제목을 입력해 주세요.");
+		    } else if(!editorData) {
+		    	alert("내용을 입력해 주세요.");
+		    } else {
+		    	document.querySelector( '#updateForm' ).submit();
+		    }
+		    
+		    
+		} );
+		
+		// 사진 옆으로 넘겨서 보기
 		$('#titleImgArea').on('click', function(){
 			$('#thumbImg1').click();
 		});

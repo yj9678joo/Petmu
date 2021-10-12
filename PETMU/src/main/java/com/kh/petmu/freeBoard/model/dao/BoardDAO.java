@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.petmu.board.model.vo.Board;
 import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.freeBoard.model.vo.freeBoard;
 
@@ -313,6 +314,228 @@ public class BoardDAO {
 		}
 		
 		return result;
+	}
+
+	public int getTitleListCount(Connection con, String keyword) {
+		int result = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getTitleListCount");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, keyword);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return result;
+	}
+
+	public int getWriterIdListCount(Connection con, String keyword) {
+		int result = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getWriterIdListCount");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, keyword);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return result;
+	}
+
+	public int getWriterNickListCount(Connection con, String keyword) {
+		int result = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("getWriterNickListCount");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, keyword);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<freeBoard> selectTitleList(Connection con, int currentPage, int limit, String keyword) {
+		ArrayList<freeBoard> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectTitleList");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, endRow);
+			ps.setString(2, keyword);
+			ps.setInt(3, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				freeBoard fb = new freeBoard();
+				
+				fb.setBno( rs.getInt("bno"));
+				fb.setcateNo( rs.getInt("cate_No"));
+				fb.setbwriterId( rs.getString("bwriter_Id"));
+				fb.setbwriterNick( rs.getString("bwriter_Nick"));
+				fb.setbtitle( rs.getString("btitle"));
+				fb.setBcontent( rs.getString("bcontent"));
+				fb.setBcount( rs.getInt("bcount"));
+				fb.setBfile( rs.getString("bfile"));
+				fb.setlikeCount( rs.getInt("likeCount"));
+				fb.setBdate( rs.getDate("bdate"));	
+				fb.setStatus(rs.getString("status"));
+				
+				list.add(fb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectWriterIdList(Connection con, int currentPage, int limit, String keyword) {
+		ArrayList<freeBoard> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectWriterIdList");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, endRow);
+			ps.setString(2, keyword);
+			ps.setInt(3, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				freeBoard fb = new freeBoard();
+				
+				fb.setBno( rs.getInt("bno"));
+				fb.setcateNo( rs.getInt("cate_No"));
+				fb.setbwriterId( rs.getString("bwriter_Id"));
+				fb.setbwriterNick( rs.getString("bwriter_Nick"));
+				fb.setbtitle( rs.getString("btitle"));
+				fb.setBcontent( rs.getString("bcontent"));
+				fb.setBcount( rs.getInt("bcount"));
+				fb.setBfile( rs.getString("bfile"));
+				fb.setlikeCount( rs.getInt("likeCount"));
+				fb.setBdate( rs.getDate("bdate"));	
+				fb.setStatus(rs.getString("status"));
+				
+				list.add(fb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectWriterNickList(Connection con, int currentPage, int limit, String keyword) {
+		ArrayList<freeBoard> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectWriterNickList");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, endRow);
+			ps.setString(2, keyword);
+			ps.setInt(3, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				freeBoard fb = new freeBoard();
+				
+				fb.setBno( rs.getInt("bno"));
+				fb.setcateNo( rs.getInt("cate_No"));
+				fb.setbwriterId( rs.getString("bwriter_Id"));
+				fb.setbwriterNick( rs.getString("bwriter_Nick"));
+				fb.setbtitle( rs.getString("btitle"));
+				fb.setBcontent( rs.getString("bcontent"));
+				fb.setBcount( rs.getInt("bcount"));
+				fb.setBfile( rs.getString("bfile"));
+				fb.setlikeCount( rs.getInt("likeCount"));
+				fb.setBdate( rs.getDate("bdate"));	
+				fb.setStatus(rs.getString("status"));
+				
+				list.add(fb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return list;
 	}
 
 
