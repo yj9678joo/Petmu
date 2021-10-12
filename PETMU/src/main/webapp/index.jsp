@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>PETMU</title>
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/petcss.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css">
 </head>
 
 <body>

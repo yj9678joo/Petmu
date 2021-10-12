@@ -76,6 +76,7 @@ public class ThumbInsert extends HttpServlet {
 		t.setbtitle(  mre.getParameter("btitle"));
 		t.setBcontent( mre.getParameter("bcontent"));
 		
+		
 		ArrayList<Attachment> list = new ArrayList<>();
 		
 		for(int i = originNames.size() - 1 ; i >= 0 ; i--) {

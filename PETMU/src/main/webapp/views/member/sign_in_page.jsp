@@ -5,7 +5,7 @@
 
 <head>
      <title>PETMU : 회원가입</title>
-     <link rel="petmu icon" href="<%= request.getContextPath()%>/resources/petmu.ico">
+     <link rel="petmu icon" href="<%=request.getContextPath()%>/resources/images/petmu.ico">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
      <script src="https://kit.fontawesome.com/c10cbac54f.js" crossorigin="anonymous"></script>
@@ -80,7 +80,7 @@
 
 <body style="background-color:#f5f6f7">
 
-     <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%= request.getContextPath()%>/resources/images/petmu.png" alt="펫뮤" > </a><br><br> 회원가입</h2>
+     <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png" alt="펫뮤" > </a><br><br> 회원가입</h2>
 
      <hr>
      <section>
@@ -88,7 +88,7 @@
 
 
 
-          <form action="<%= request.getContextPath() %>/insert.do" method="post" id="joinForm" style="text-align: center; ">
+          <form action="/PetMu/insert.do" method="post" id="joinForm" style="text-align: center; ">
 
 
 
@@ -111,7 +111,7 @@
 
 
                <h3 id="join" align="center"  style="padding-right: 350px;" >닉네임</h3>
-               <div><input  class="input" style="margin-left : 88px" type="text" id="nickname" name="nickname" required="required">  <label id="nicknameCheck"  class="fas fa-check" style="font-size: 30px; color: coral; position: relative; bottom:13px;"></label></div>
+               <div><input  class="input" style="margin-left : 88px" type="text" id="nickname" name="nickname" placeholder=" * 최대 8글자 이내" maxlength = 8 required="required">  <label id="nicknameCheck"  class="fas fa-check" style="font-size: 30px; color: coral; position: relative; bottom:13px;"></label></div>
                
 
 
@@ -230,8 +230,7 @@
     	 
     	 
 		
-		if($("#userPwd").val() == "" || $("#userId").val() == ""|| $("#nickname").val() == "" || $("#userName").val() == "" || $("#yy").val() == "" || $("#mm").val() == "" || $("#dd").val() == ""
-			|| $("#email").val() == "" || $("#zipCode").val() == "" || $("#address1").val() == ""|| $("#address2").val() == ""	|| $("input:checkbox[name='petType']:checked").length == 0
+		if($("#userPwd").val() == "" || $("#userId").val() == ""|| $("#nickname").val() == "" || $("#userName").val() == "" || $("#birth").val() == "" || $("#email").val() == "" || $("#zipCode").val() == "" || $("#address1").val() == ""|| $("#address2").val() == ""	|| $("input:checkbox[name='petType']:checked").length == 0
 		) alert("모든 입력사항을 기입해주세요.");
 		
 		
@@ -252,7 +251,7 @@
 		
     	 var id = $("#userId").val();
     	 $.ajax({
-			 url : '<%= request.getContextPath()%>/idcheck.do',
+			 url : '/PetMu/idcheck.do',
 			 type: 'post',
 			 data : { userId : $('#userId').val() },
 			 success : function( data ) {
@@ -273,7 +272,7 @@
      
      $('#nicknameCheck').on('click', function(){
 		 $.ajax({
-			 url : '<%= request.getContextPath()%>/nicknamecheck.do',
+			 url : '/PetMu/nicknamecheck.do',
 			 type: 'post',
 			 data : { nickname : $('#nickname').val() },
 			 success : function( data ) {
@@ -294,7 +293,7 @@
      
      $('#emailCheck').on('click', function(){
 		 $.ajax({
-			 url : '<%= request.getContextPath()%>/emailcheck.do',
+			 url : '/PetMu/emailcheck.do',
 			 type: 'post',
 			 data : { email : $('#email').val() },
 			 success : function( data ) {

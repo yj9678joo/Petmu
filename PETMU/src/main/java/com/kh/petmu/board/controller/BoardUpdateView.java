@@ -39,7 +39,7 @@ public class BoardUpdateView extends HttpServlet {
 		String page = "";
 		if(b != null) {
 			request.setAttribute("board", b);
-			
+			request.setAttribute("cate", cateNo);
 			switch(cateNo) {
 				case 3 : page = "views/board/info_review/hospital/infoUpdate.jsp";
 						 break;

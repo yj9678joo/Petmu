@@ -22,7 +22,7 @@
 </head>
 <body style="background-color:#f5f6f7;  padding-left: 10px;">
    
-    <h2 align="center" style="margin-top: 150px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png" alt="펫뮤" > </a><br><br> 로그인 </h2>
+    <h2 align="center" style="margin-top: 150px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png" alt="펫뮤" > </a><br><br>비밀번호 변경이 완료되었습니다. 다시 로그인 해주세요. </h2>
     <br><hr><br><br>
 
 
@@ -40,7 +40,7 @@
 
 &nbsp;<label id="memberJoinBtn" onclick="memberJoin()" class="fas fa-sign-in-alt" style="font-size: 25px;"> 회원가입 &nbsp; </label> <br><br><br><br>
 <label id="loginBtn" onclick="idSerch()"   style="font-size: 20px; font-weight: 800; color: gray; margin-left: 26px;"> 아이디 찾기</label>
-&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
 <label id="loginBtn" onclick="pwSerch()"  style="font-size: 20px; font-weight: 800; color: gray;"> 비밀번호 찾기</label>
 <br /><br /><br /><br /><br />
     </form>

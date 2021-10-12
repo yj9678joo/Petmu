@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>PETMU : 이용약관</title>
-    <link rel="petmu icon" href=".<%= request.getContextPath()%>/resources/images/petmu.ico">
+    <link rel="petmu icon" href="<%=request.getContextPath()%>/resources/images/petmu.ico">
 </head>
 <body>
     <h2 style='font-size:25px;'>Petmu 개인정보처리방침</h2>
@@ -200,4 +200,6 @@
 
 </div>
 </body>
+
+<footer style="margin-top:200px">  <%@ include file="/views/common/footer.jsp" %>	</footer>
 </html>

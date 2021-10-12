@@ -2,6 +2,7 @@ package com.kh.petmu.member.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,7 +61,7 @@ public class MemberLogin extends HttpServlet {
 			} else {
 				// 로그인 실패!
 				
-				request.setAttribute("error-msg", "로그인 실패!, 아이디나 비밀번호 확인 필요!");
+				request.setAttribute("error-msg", "로그인 실패! 아이디나 비밀번호 확인 필요!");
 				
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				

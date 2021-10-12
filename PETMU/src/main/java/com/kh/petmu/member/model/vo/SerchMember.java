@@ -6,14 +6,14 @@ import java.sql.Date;
 
 // VO(Value Object)
 // 데이터 전달용 그릇 역할을 하는 클래스
-public class Member implements Serializable {
+public class SerchMember implements Serializable {
 
 	/**
 	 * 다른 위치에 있는 동일한 Member 클래스가
 	 * 현재 위치의 Member 클래스와 충돌할 경우
 	 * 헷갈리지 않도록 주는 고유 속성
 	 */
-	private static final long serialVersionUID = 2803L;
+	private static final long serialVersionUID = 2833L;
 
    //1. 필드변수
 	private String userId;
@@ -30,30 +30,19 @@ public class Member implements Serializable {
 
 	
 	// 2. 생성자
-	public Member() { }
+	public SerchMember() { }
 
-	public Member(String userId, String userPwd) {
-		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
-	}
 	
-	public Member(String userId, String userName, String email, String userPwd) {
+	//유저 아이디 찾기용 생성자
+	public SerchMember(String userName, String email) {
 		super();
-		
-		this.userId = userId;
 		this.userName = userName;
 		this.email = email;
-		this.userPwd = userPwd; 
-	
-		
-	
 	}
 	
 	
-	
 
-	public Member(String userId, String userPwd, String nickname, String userName, Date birth, String email,
+	public SerchMember(String userId, String userPwd, String nickname, String userName, Date birth, String email,
 			String address, String petType, String petName, String levelType, Date enrollDate) {
 		super();
 		this.userId = userId;

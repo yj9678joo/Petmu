@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.kh.petmu.member.model.vo.Member" %>
+ <%
+ 	Member m = (Member)session.getAttribute("member");
+ %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
    <title>PETMU : 개인정보수정</title>
-   <link rel="petmu icon" href="<%= request.getContextPath()%>/resources/petmu.ico">
+   <link rel="petmu icon" href="<%=request.getContextPath()%>/resources/images/petmu.ico">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="https://kit.fontawesome.com/c10cbac54f.js" crossorigin="anonymous"></script>
    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -41,14 +46,14 @@
 </head>
 
 <body style="background-color:#f5f6f7">
-   <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%= request.getContextPath()%>/resources/images/petmu.png"alt="펫뮤" > </a><br><br>개인정보수정</h2>
+   <h2 align="center" style="margin-top: 80px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png"alt="펫뮤" > </a><br><br>개인정보수정</h2>
 
 
    <hr>
    <br><br>
 
 
-   <form action="<%= request.getContextPath()%>/update.do" method="post" id="updateForm" style="text-align: center;">
+   <form action="/PetMu/update.do" method="post" id="updateForm" style="text-align: center;">
 
    <div style="display: table;  margin: auto;">
    <table align="center" style="width: 300px; padding-left: 42px;">
@@ -64,7 +69,7 @@
 
    <tr>
 
-      <td colspan="3" class="value"> <input type="password" id="userPwd" class="input" placeholder=" * 숫자, 영문자, 특수문자 포함 8~16자리 이내"></td>
+      <td colspan="3" class="value"> <input type="password" name="userPwd" id="userPwd" maxlength = 16 class="input" placeholder=" * 숫자, 영문자, 특수문자 포함 8~16자리 이내"></td>
 
 
    </tr>
@@ -81,31 +86,26 @@
    <tr>
       <td id="val"><br>닉네임</td>
    
-      <td colspan="2" class="value"><br>닉네임</td>  </tr>
+      <td colspan="2" class="value"><br><%= m.getNickname() %></td>  </tr>
 
    <tr>
       <td colspan="2" id="val"><br>이름</td> 
    
-      <td class="value"><br>홍기르동</td>
+      <td class="value"><br><%= m.getUserName() %></td>
    </tr>
 
-   <tr>
-      <td colspan="2" id="val"><br>성별</td>
-      <td class="value"><br>남자</td>
-      </tr>
+ 
 
       <tr>
          <td colspan="2" id="val"><br>생년월일</td>
-         <td class="value"><br>YYYY-MM-DD</td>
+         <td class="value"><br><%= m.getBirth() %></td>
       </tr>
 
       <tr>
 
-         <td id="val"><br>이메일</td>
-        </tr> 
+         <td colspan="2" id="val"><br>이메일</td>
         
-        <tr>
-         <td colspan="3"><input type="text" id="userId" class="input"></td>
+         <td class ="value" colspan="3"><br /><%= m.getEmail() %></td>
 
       </tr>
 
@@ -113,9 +113,9 @@
          <td colspan="4" id="val"><br>주소</td>   
   
       </tr>
-      <tr><td colspan="4"><input type="text" id="zipCode" class="input"></td>
+      <tr><td colspan="4"><input type="text" id="zipCode" name="zipCode" class="input"></td>
       
-         <td><div class="fas fa-search-location" style="font-size: 30px; color: coral; position: relative; left: 22px; bottom:0px;" id="ckZip" onclick="addrSearch();"></div></td>
+         <td><div class="fas fa-search-location" style="font-size: 30px; color: coral; position: relative; left: 22px; bottom:0px;" id="ckZip"  onclick="addrSearch();"></div></td>
       </tr>
 
       <tr><td colspan="4"><br><input  class="input" type="text" id="address1" name="address1"></td></tr>
@@ -128,11 +128,12 @@
 <br>
 
 <h3 style="font-weight: 500;" >애완동물을 기르고 계신가요?</h3>
-<input type="checkbox" name="petType" value="강아지"> 강아지 &nbsp;
-<input type="checkbox" name="petType" value="고양이"> 고양이 &nbsp;
-<input type="checkbox" name="petType" value="기타"> 기타 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="강아지"> 강아지 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="고양이"> 고양이 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="기타"> 기타 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="없음"> 없음 &nbsp;
  <br><br>
-<label style="font-size: 18px;">반려동물명 : </label> <input type="text" name="petType" value="" placeholder=" 직접 입력해주세요!" style="width: 200px; height: 35px; font-size: 18px;"> 
+<label style="font-size: 18px;">반려동물명 : </label> <input type="text" name="petName" value="" placeholder=" 직접 입력해주세요!" style="width: 200px; height: 35px; font-size: 18px;"> 
 
 
 
@@ -144,6 +145,10 @@
 
 </form>
 </body>
+<footer>
+
+<footer style="margin-top:100px">  <%@ include file="/views/common/footer.jsp" %>	</footer>
+</footer>
 
 <script>
  
@@ -197,7 +202,16 @@
 	}
 
    $("#updateForm").submit(function(event){
-		if($("#userPwd").val() == "" ) alert("비밀번호는 필수 값입니다.");
+	   
+	   var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+		 var password = $("#userPwd").val();
+	   
+	   
+	   if($("#userPwd").val() == "" || $("#email").val() == "" || $("#zipCode").val() == "" || $("#address1").val() == ""|| $("#address2").val() == ""	
+	   || $("input:checkbox[name='petType']:checked").length == 0) 
+		alert("모든 입력사항을 기입해주세요.");
+	   
+	    else if(false === pwPattern.test(password)) alert('비밀번호는 8자 이상이어야 하며, 숫자/영문자/특수문자를 포함해야합니다.');
 		else if($('#userPwd').val() != $('#userPwd2').val()) alert("비밀번호 확인 값과 다릅니다.");
 		else return;
 		event.preventDefault();

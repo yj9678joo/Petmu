@@ -2,6 +2,7 @@ package com.kh.petmu.member.model.dao;
 
 import static com.kh.petmu.common.JDBCTemplate.*;
 
+import static com.kh.petmu.common.JDBCTemplate.close;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.petmu.member.model.vo.Member;
+import com.kh.petmu.member.model.vo.SerchMember;
 
 public class MemberDAO {
 	// key와 value가 모두 문자열로 이루어진 
@@ -226,6 +228,138 @@ public int emailcheck(Connection con, String email) {
 	
 	return result;
 }
+
+public int updateMember(Connection con, Member m) {
+	int result = 0;
+	PreparedStatement ps = null;
+	String sql = prop.getProperty("updateMember");
+	
+	try {
+	
+		ps = con.prepareStatement(sql);
+		ps.setString(1, m.getUserPwd() );		
+    	ps.setString(2, m.getAddress() );	
+    	ps.setString(3, m.getPetType());
+    	ps.setString(4, m.getPetName());
+		ps.setString(5, m.getUserId() );		
+		result = ps.executeUpdate();
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	} finally {
+		
+		close(ps);
+	}
+			
+	return result;
 }
+
+public int nicknameUpdate(Connection con, Member m) {
+	int result = 0;
+	PreparedStatement ps = null;
+	String sql = prop.getProperty("nicknameUpdate");
+	
+	try {
+	
+		ps = con.prepareStatement(sql);
+
+		ps.setString(1, m.getNickname() );
+		ps.setString(2, m.getUserId() );
+		
+		result = ps.executeUpdate();
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	} finally {
+		
+		close(ps);
+	}
+			
+	return result;
+}
+
+public String memberSerch(Connection con, SerchMember serchMember) {
+	String id = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	System.out.println("DAO 전달 확인");
+	String sql = prop.getProperty("serchMember");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setString(1, serchMember.getUserName());
+		ps.setString(2, serchMember.getEmail());
+		rs = ps.executeQuery();
+		if(rs.next()) {
+			id = rs.getString("userId");
+			
+		} 
+		
+		
+		
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	} finally {
+		
+		close(rs);
+		close(ps);
+		
+		
+		
+	}
+	
+	System.out.println("id = " + id);
+	return id;
+	
+}
+
+public int pwdChange(Connection con, Member m) {
+	
+	String userPwd = m.getUserPwd();
+	String userId = m.getUserId();
+	String userName = m.getUserName();
+	String email = m.getEmail();
+	
+	
+	
+	String id = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	int result = 0;
+	System.out.println("DAO 입력 확인" + userPwd  + "/" + userId  + "/" + userName  + "/" + email);
+	String sql = prop.getProperty("userpwdcahnge");
+	
+	try {
+		ps = con.prepareStatement(sql);
+		
+		ps.setString(1, m.getUserPwd());
+		ps.setString(2, userId);
+		ps.setString(3, userName);
+		ps.setString(4, email);
+		result = ps.executeUpdate();
+		
+	} catch (SQLException e) {
+
+		
+		e.printStackTrace();
+	} finally {
+		close(ps);
+	}
+	System.out.println("PW변경 RESULT :" + result);
+	return result;
+}
+
+}
+
+
+
+
+
+
+
 
 

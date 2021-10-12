@@ -26,7 +26,7 @@
 
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 
-
+<link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
 
 </head>
 <body>

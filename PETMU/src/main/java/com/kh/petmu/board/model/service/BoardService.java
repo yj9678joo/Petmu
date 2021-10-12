@@ -195,7 +195,29 @@ public class BoardService {
 
 
 
+	
+	
+	// 민수님 작성
+	
+	public ArrayList<Board> selectPersonalList(String nickname, int currentPage, int limit) {
+	      con = getConnection();
+	      
+	      ArrayList<Board> list = dao.selecPersonaltList(con, nickname, currentPage, limit);
 
+	      close(con);
+	      
+	      return list;
+	}
+	   
+	
+   public int getPersonalListCount(String nickname) {
+	      con = getConnection();
+	      int result = dao.getPersonalListCount(con, nickname);
+	      
+	      close(con);
+	      
+	      return result;
+   }
 
 
 

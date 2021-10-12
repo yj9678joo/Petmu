@@ -54,7 +54,7 @@ public class BoardInsert extends HttpServlet {
 		String page = "";
 		
 		if(result > 0) {
-			
+			request.setAttribute("cate", cateNo);
 			switch(cateNo) {
 			case 3 : page = "selectList.bo?cate=3";
 					 break;

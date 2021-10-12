@@ -48,7 +48,7 @@ public class BoardSelectOne extends HttpServlet {
 			request.setAttribute("board", b);
 			request.setAttribute("coList", coList);
 			request.setAttribute("cmtCount", cmtCount);
-			
+			request.setAttribute("cate", cateNo);
 			switch(cateNo) {
 				case 3 : page = "views/board/info_review/hospital/infoDetail.jsp";
 						 break;

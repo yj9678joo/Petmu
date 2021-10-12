@@ -546,7 +546,95 @@ public class BoardDAO {
 		return list;
 	}
 
+	
+	
+	
+	
+	// 민수님 작성
+	
 
+	   public int getPersonalListCount(Connection con, String nickname) {
+	      int result = 0;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      String sql = prop.getProperty("getPersonalListCount");
+	      
+	      try {
+	         ps = con.prepareStatement(sql);
+	         
+	         ps.setString(1, nickname);
+	         
+	         rs = ps.executeQuery();
+	         
+	         //rs의 값 가져오기
+	         if(rs.next()) {
+	            result = rs.getInt(1);
+	         }
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs);
+	         close(ps);
+	      }
+	      
+	      return result;
+	   }
+	   
+	   
+	   
+	   public ArrayList<Board> selecPersonaltList(Connection con, String nickname, int currentPage, int limit) {
+		      ArrayList<Board> list = new ArrayList<>();
+		      PreparedStatement ps = null;
+		      ResultSet rs = null;
+		      
+		      String sql = prop.getProperty("selectPersonalList");
+		      
+		      try {
+		         ps = con.prepareStatement(sql);
+		         
+		         int startRow = (currentPage - 1) * limit + 1;
+		         int endRow = startRow + limit - 1;
+		         
+		         ps.setString(1, nickname);
+		         ps.setInt(2, endRow);
+		         ps.setInt(3, startRow);
+		         
+		         rs = ps.executeQuery();
+		         
+		         while(rs.next()) {
+		            Board b = new Board();
+		            
+		            b.setBno(rs.getInt("bno"));
+		            b.setCateNo(rs.getInt("cate_no"));
+		            b.setBwriterId(rs.getString("bwriter_id"));
+		            b.setBwriterNick(rs.getString("bwriter_nick"));
+		            b.setBtitle(rs.getString("btitle"));
+		            b.setBcontent(rs.getString("bcontent"));
+		            b.setBcount(rs.getInt("bcount"));
+		            b.setBfile(rs.getString("bfile"));
+		            b.setLikeCount(rs.getInt("likecount"));
+		            b.setBdate(rs.getDate("bdate"));
+		            b.setStatus(rs.getString("status"));
+
+		            list.add(b);
+		            
+		         }
+		         
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(rs);
+		         close(ps);
+		      }
+		      
+		      
+		      return list;
+		   }
+	   
+	
+	
+	
 }
 
 

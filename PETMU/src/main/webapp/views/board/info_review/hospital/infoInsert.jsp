@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardInsert.css" />
  
+ <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
+ 
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 

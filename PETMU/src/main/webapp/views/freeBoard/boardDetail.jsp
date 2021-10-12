@@ -559,7 +559,7 @@ function deleteOk(){
         // 취소(아니오) 버튼 클릭 시 이벤트
     } else {
         // 확인(예) 버튼 클릭 시 이벤트
-    	location.href='<%=request.getContextPath()%>/delete.fb&bno=<%= fb.getBno() %>';         
+    	location.href='<%=request.getContextPath()%>/delete.fb?bno=<%= fb.getBno() %>';         
     }
 	
 }

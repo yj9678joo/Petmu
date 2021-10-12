@@ -1,28 +1,26 @@
 @charset "UTF-8";
 
     header{
+    	width : 1450px;
         height: 200px;
+        margin: 0 auto;
     }
     
     #logo {
-        position: absolute;
         top: 23px;
         left: 20px;
     }
 
     #top_menu {
-        position: absolute;
         top: 20px;
         right: 10px;
     }
 
     .top{
-        float: left;
         margin: 5px;
     }
 
     #serch {
-        position: absolute;
         top: 60px;
         left: 220px;
     }
@@ -38,7 +36,6 @@
     }
 
     #menu{
-        position: absolute;
         top: 110px;
         font-size:20px;
     }

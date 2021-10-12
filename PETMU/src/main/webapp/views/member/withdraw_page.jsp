@@ -4,17 +4,19 @@
 <html>
 <head>
      <title>PETMU : 회원탈퇴</title>
-     <link rel="petmu icon" href="<%= request.getContextPath()%>/resources/petmu.ico">
+     <link rel="petmu icon" href="<%=request.getContextPath()%>/resources/images/petmu.ico">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <script src="https://kit.fontawesome.com/c10cbac54f.js" crossorigin="anonymous"></script>
-     <style>
-
-     </style>
+ 
+ 
+ 
+ 
 </head>
-<body style="min-width: 1000px; background-color:#f5f6f7; margin-left: 150px; margin-right: 150px;">
-     
-    <br><br><br><br><br><br>
-    <h1> <label class="fas fa-user-alt-slash" style="color: coral;"  ></label> 회원탈퇴</h1>
+
+<header style="">   <%@ include file="/views/common/header.jsp" %> </header>
+<body style="min-width: 1000px; background-color:#f5f6f7; margin-left: 150px; margin-right: 130px;">
+    
+    <br><br>    <h1> <label class="fas fa-user-alt-slash" style="color: coral;"  ></label> 회원탈퇴</h1>
 
 
 <hr style="border-width:1px;">
@@ -36,13 +38,30 @@
 &nbsp;&nbsp;&nbsp; 게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</label>
 </label>
 <br><br><br><br>
-
-<label>&nbsp;&nbsp;&nbsp; 개인정보 보호를 위해 비밀번호를 확인해주세요.</label> <br>
+   
+<label>&nbsp;&nbsp;&nbsp; 개인정보 보호를 위해 아이디와 비밀번호를 확인해주세요.</label> <br>
+<form action="/PetMu/delete.do" method="post" id="deleteForm">
+&nbsp;&nbsp;&nbsp; <input type="text" name="userId" id="userId" placeholder=" ID" style="width: 300px; height: 27px; margin-top: 10px;"> <br />
 &nbsp;&nbsp;&nbsp; <input type="password" name="userPwd" id="userPwd" placeholder=" PASSWORD" style="width: 300px; height: 27px; margin-top: 10px;"> 
 <br><br><br><br>
-&nbsp;&nbsp;&nbsp; <label style="color: coral; font-size: 20px; font-weight: 600; " onclick="userDelete" > 탈퇴하기 </label>
+
+&nbsp;&nbsp;&nbsp; <label onclick="userDelete()" id="userDelete" style="color: coral; font-size: 20px; font-weight: 600; "> 탈퇴하기 </label>
+</form>
+
 <br><br><br><br><br>
 </body>
-<script></script>
+
+<footer>
+
+ <%@ include file="/views/common/footer.jsp" %>
+
+</footer>
+
+<script>
+function userDelete(){
+	$('#deleteForm').submit();
+}
+
+</script>
 
 </html>
