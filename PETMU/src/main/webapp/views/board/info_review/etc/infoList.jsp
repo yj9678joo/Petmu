@@ -11,6 +11,7 @@
  	int maxPage = pi.getMaxPage();
  	int currentPage = pi.getCurrentPage();
  	int listCount = pi.getListCount();
+ 	int limit = pi.getLimit();
  %>
  
 <!DOCTYPE html>
@@ -73,7 +74,7 @@
                 </table>
             </div>
     		<br />
-    		<%if(pi.getListCount() > 1) {%>
+    		<%if(pi.getListCount() > limit) {%>
 	            <div class="pagingArea" align="center">
 	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1&cate=7'"><<</button> <%--cate check --%>
 	    			<%-- currentPage, stardPage, endPage, listCount받아와서 페이징 --%>
