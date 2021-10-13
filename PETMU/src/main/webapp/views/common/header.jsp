@@ -5,11 +5,9 @@
 Member m = (Member) session.getAttribute("member");
 %>
 
-<link rel="preconnect" href="<%=request.getContextPath()%>https://fonts.googleapis.com">
-<link rel="preconnect" href="<%=request.getContextPath()%>https://fonts.gstatic.com" crossorigin>
-<link
-	href="<%=request.getContextPath()%>https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
-	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css">
 

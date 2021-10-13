@@ -35,24 +35,12 @@ public class BoardDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 멀티 파트 확인
-		if( ! ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("error-msg", "multipart 전송이 아닙니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+
+		String savePath = request.getServletContext().getRealPath("resources/boardUploadFiles");
 		
-		// 2. 전송받을 파일 최대 크기
-		int maxSize = 1024 * 1024 * 10; // 10MB
+
 		
-		// 3. 저장된 폴더
-		String root = request.getServletContext().getRealPath("/");
-		String savePath = root + "resources/boardUploadFiles";
-		
-		// 4. 멀티파트 객체 선언
-		MultipartRequest mre = new MultipartRequest(request, savePath, maxSize, "UTF-8", 
-													new DefaultFileRenamePolicy() );
-		
-		int bno = Integer.parseInt(mre.getParameter("bno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		BoardService service = new BoardService();
 		
