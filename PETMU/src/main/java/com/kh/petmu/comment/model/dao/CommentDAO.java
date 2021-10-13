@@ -66,7 +66,7 @@ public class CommentDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(con);
+			close(ps);
 		}
 		
 		return result;
@@ -107,6 +107,27 @@ public class CommentDAO {
 			
 			result = ps.executeUpdate();
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		}
+		
+		return result;
+	}
+
+	public int minusCmtCount(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement ps = null;
+		String sql = prop.getProperty("minusCmtCount");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, bno);
+			
+			result = ps.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

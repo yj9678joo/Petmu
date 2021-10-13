@@ -35,13 +35,20 @@ public class CommentService {
 		return result;
 	}
 
-	public int deleteComment(int cno) {
+	public int deleteComment(int cno, int bno) {
 		con = getConnection();
 		
 		int result = dao.deleteComment(con, cno);
-		
+
 		if(result > 0) {
-			commit(con);
+			
+			int result2 = dao.minusCmtCount(con, bno);
+
+			if(result2 > 0) {
+				commit(con);				
+			} else {
+				rollback(con);
+			}
 		} else {
 			rollback(con);
 		}

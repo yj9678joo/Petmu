@@ -288,11 +288,12 @@
 		        
 		        // 가장 가까운 div의 cno값
 		        var cno = $(this).closest('div').find('input[name=cno]').val();
+		        var bno = <%= b.getBno() %>;
 		        
 		    	$.ajax({
 					url : "<%= request.getContextPath() %>/cmtDelete.co",
 					type : "post",
-					data : { cno },
+					data : { cno, bno },
 					success : function(data){
 						if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
 							document.location.reload();

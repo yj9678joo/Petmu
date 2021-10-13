@@ -100,6 +100,7 @@
 	                            <div class="cmtHead">
 	                                <div>
 	                                	<input type="hidden" name="cno" value="<%= c.getCno() %>"/> <%--cno 가져오기 --%>
+	                                	<input type="hidden" name="bno" value="<%= b.getBno() %>"/> 
 	                                    <span style="font-size: 14px; font-weight: bold;"><%= c.getCwriterNick() %></span>
 	                                    <input type="hidden" name="cwriterId" value="<%= c.getCwriterId() %>"/> <%--cno 가져오기 --%>
 	                                </div>
@@ -168,7 +169,7 @@
 			var bno = <%= b.getBno() %>;
 			var id = '<%= m.getUserId() %>'; <%-- <%= m.getUserId() %> --%> 
 			
-			console.log(bno, id);
+			//console.log(bno);
 			
 			if(!confirm("이 게시글을 추천 하시겠습니까?")){
 				// 취소 버튼 클릭시
@@ -270,28 +271,33 @@
 			
 	
 	// 댓글 삭제 함수
-	$('i[id*=cmtDel]').click(function(){
-		if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
-	        // 취소(아니오) 버튼 클릭 시 이벤트
-	    } else {
-	        // 확인(예) 버튼 클릭 시 이벤트
-	        var cno = $(this).closest('div').find('input[name=cno]').val();
-	        
-	    	$.ajax({
-				url : "<%= request.getContextPath() %>/cmtDelete.co",
-				type : "post",
-				data : { cno },
-				success : function(data){
-					if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
-						document.location.reload();
+	$('i[id*=cmtDel]').click(
+		function (){
+			if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
+		        // 취소(아니오) 버튼 클릭 시 이벤트
+		    } else {
+		        // 확인(예) 버튼 클릭 시 이벤트
+		        
+		        // 가장 가까운 div의 cno값
+		        var cno = $(this).closest('div').find('input[name=cno]').val();
+		        var bno = <%= b.getBno() %>;
+		        
+		    	$.ajax({
+					url : "<%= request.getContextPath() %>/cmtDelete.co",
+					type : "post",
+					data : { cno, bno },
+					success : function(data){
+						if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+							document.location.reload();
+						}
+					}, error : function(error){
+						alert("댓글 삭제 실패");
 					}
-				}, error : function(error){
-					alert("댓글 삭제 실패");
-				}
-				
-			});        
-	    }
-	});
+					
+				});        
+		    }
+		}
+	);
 	
 	// 목록, 수정, 삭제 함수
 	function goList(){

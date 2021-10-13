@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardDetail.css" />
 <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
@@ -271,28 +272,33 @@
 			
 	
 	// 댓글 삭제 함수
-	$('i[id*=cmtDel]').click(function(){
-		if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
-	        // 취소(아니오) 버튼 클릭 시 이벤트
-	    } else {
-	        // 확인(예) 버튼 클릭 시 이벤트
-	        var cno = $(this).closest('div').find('input[name=cno]').val();
-	        
-	    	$.ajax({
-				url : "<%= request.getContextPath() %>/cmtDelete.co",
-				type : "post",
-				data : { cno },
-				success : function(data){
-					if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
-						document.location.reload();
+	$('i[id*=cmtDel]').click(
+		function (){
+			if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
+		        // 취소(아니오) 버튼 클릭 시 이벤트
+		    } else {
+		        // 확인(예) 버튼 클릭 시 이벤트
+		        
+		        // 가장 가까운 div의 cno값
+		        var cno = $(this).closest('div').find('input[name=cno]').val();
+		        var bno = <%= b.getBno() %>;
+		        
+		    	$.ajax({
+					url : "<%= request.getContextPath() %>/cmtDelete.co",
+					type : "post",
+					data : { cno, bno },
+					success : function(data){
+						if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+							document.location.reload();
+						}
+					}, error : function(error){
+						alert("댓글 삭제 실패");
 					}
-				}, error : function(error){
-					alert("댓글 삭제 실패");
-				}
-				
-			});        
-	    }
-	});
+					
+				});        
+		    }
+		}
+	);
 	
 	// 목록, 수정, 삭제 함수
 	function goList(){

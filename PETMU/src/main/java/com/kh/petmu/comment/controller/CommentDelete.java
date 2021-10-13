@@ -30,10 +30,12 @@ public class CommentDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cno = Integer.parseInt(request.getParameter("cno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		//System.out.println("서블릿 : " + cno); //확인 완료
+		//System.out.println("서블릿 : " + bno); //확인 완료
 		
-		int result = new CommentService().deleteComment(cno);
+		int result = new CommentService().deleteComment(cno, bno);
 		
 		if(result > 0) {
 			response.getWriter().print(result);
