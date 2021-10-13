@@ -5,7 +5,7 @@
         float : left;
         border : 2px solid orange;
         border-radius : 4px;
-        
+        font-family: 'Nanum Gothic', sans-serif;
     }
 
 .sideMenu ul{
