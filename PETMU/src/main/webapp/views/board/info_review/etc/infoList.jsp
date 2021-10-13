@@ -133,7 +133,7 @@
     <script>
  
     	function post(){
-	    	location.href = "views/board/info_review/etc/infoInsert.jsp";
+	    	location.href = "<%= request.getContextPath() %>/insertView.bo?cate=1";
     	}
     	
     	<%-- 게시글 td누르면 bno값들고 selectOne.bo로 이동--%>

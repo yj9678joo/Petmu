@@ -33,6 +33,8 @@ public class BoardInsert extends HttpServlet {
 		
 		int cateNo = Integer.parseInt(request.getParameter("cate"));
 		
+
+		
 		String bwriterId = request.getParameter("bwriterId");
 		String bwriterNick = request.getParameter("bwriterNick");
 		String btitle = request.getParameter("btitle");
