@@ -16,7 +16,7 @@
 <title>PETMU : 기타 장소 공유</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardDetail.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />

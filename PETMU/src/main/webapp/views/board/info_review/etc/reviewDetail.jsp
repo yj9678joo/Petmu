@@ -16,7 +16,7 @@
 <title>PETMU : 기타 장소 이용 후기</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardDetail.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
@@ -109,7 +109,7 @@
 	                                </div>
 	                                <%if(m != null && m.getUserId().equals(c.getCwriterId())) { %>
 		                                <span style="font-size: 13px;">
-		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>');"></i> &nbsp;
+		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>', '<%= c.getCdate() %>');"></i> &nbsp;
 		                                    <i class="far fa-trash-alt" id="cmtDel<%= c.getCno() %>"></i>
 		                                </span>
 		                          	<%} %>
@@ -214,7 +214,7 @@
 	// 댓글 수정 함수
 	
 	// 수정 아이콘 클릭시 수정 댓글창으로 변경
-	function updateCon(cno, nick, content){
+	function updateCon(cno, nick, content, cdate){
 		var htmls = "";
 		
 		htmls += '<div class="cmtUpdate">';
@@ -236,7 +236,9 @@
 		htmls += content;
 		htmls += '</textarea>';
 		htmls += '</div>';
-		htmls += '<div class="upFoot">2021-10-08</div>';
+		htmls += '<div class="upFoot">';
+		htmls += cdate;
+		htmls += '</div>';
 		htmls += '</div>';
 		
 		$('.cmts'+cno).replaceWith(htmls);

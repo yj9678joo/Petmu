@@ -44,7 +44,7 @@ public class ThumbInsert extends HttpServlet {
 		}
 		
 		// 2. 파일 사이즈 선언
-		int maxSize = 1024 * 1024 * 10; // 10MB
+		int maxSize = 1024 * 1024 * 30; 
 		
 		// 3. 저장 경로 선언
 		String root = request.getServletContext().getRealPath("/");
@@ -75,7 +75,6 @@ public class ThumbInsert extends HttpServlet {
 		t.setbwriterNick( mre.getParameter("bwriterNick"));
 		t.setbtitle(  mre.getParameter("btitle"));
 		t.setBcontent( mre.getParameter("bcontent"));
-		
 		
 		ArrayList<Attachment> list = new ArrayList<>();
 		

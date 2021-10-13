@@ -11,7 +11,7 @@
 
 <body style="min-width: 1000px; background-color:#f5f6f7">
 
-   
+
     <div style=" position: absolute; top: 5%; left: 50%; transform: translateX(-50%); " >
         <h2 align="center" style="margin-top : 150px"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png" alt="펫뮤" style="" ></a> <br><br> 회원 약관</h2>
         <table align="center" class="member_join_step03_terms_table" >

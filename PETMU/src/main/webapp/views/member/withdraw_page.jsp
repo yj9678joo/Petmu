@@ -45,7 +45,7 @@
 &nbsp;&nbsp;&nbsp; <input type="password" name="userPwd" id="userPwd" placeholder=" PASSWORD" style="width: 300px; height: 27px; margin-top: 10px;"> 
 <br><br><br><br>
 
-&nbsp;&nbsp;&nbsp; <label onclick="userDelete()" id="userDelete" style="color: coral; font-size: 20px; font-weight: 600; "> 탈퇴하기 </label>
+&nbsp;&nbsp;&nbsp; <label onclick="userDelete()" id="userDelete" style="color: coral; font-size: 20px; font-weight: 600; cursor: pointer;"> 탈퇴하기 </label>
 </form>
 
 <br><br><br><br><br>
@@ -59,6 +59,8 @@
 
 <script>
 function userDelete(){
+	
+	
 	$('#deleteForm').submit();
 }
 

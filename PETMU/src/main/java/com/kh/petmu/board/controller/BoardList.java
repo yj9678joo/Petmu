@@ -61,13 +61,18 @@ public class BoardList extends HttpServlet {
 		
 		// 게시글 총 수
 		int listCount = 0;
+		
 		if(target == null && keyword == null) {
+			// 검색을 하지 않았을 때
 			listCount = service.getListCount(cateNo);
 		} else if(target.equals("title") && keyword != null) {
+			// 제목으로 검색
 			listCount = service.getTitleListCount(cateNo, keyword);
 		} else if(target.equals("writerId") && keyword != null) {
+			// 작성자 아이디로 검색
 			listCount = service.getWriterIdListCount(cateNo, keyword);
 		} else if(target.equals("writerNick") && keyword != null) {
+			// 작성자 닉네임으로 검색
 			listCount = service.getWriterNickListCount(cateNo, keyword);
 		}
 		
@@ -86,13 +91,18 @@ public class BoardList extends HttpServlet {
 		
 		// -------------------------페이지 처리 끝----------------------------------- //
 		
+		// 게시글 리스트 가져오기
 		if(target == null && keyword == null) {
+			// 검색하지 않았을 때
 			list = service.selectList(cateNo, currentPage, limit);
 		} else if(target.equals("title") && keyword != null) {
+			// 제목으로 검색
 			list = service.selectTitleList(cateNo, currentPage, limit, keyword);
 		} else if(target.equals("writerId") && keyword != null) {
+			// 아이디로 검색
 			list = service.selectWriterIdList(cateNo, currentPage, limit, keyword);
 		} else if(target.equals("writerNick") && keyword != null) {
+			// 닉네임으로 검색
 			list = service.selectWriterNickList(cateNo, currentPage, limit, keyword);
 		}
 		

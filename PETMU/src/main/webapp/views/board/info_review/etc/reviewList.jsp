@@ -21,7 +21,7 @@
     <title>PETMU : 기타 장소 이용 후기</title>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sideMenu.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />   
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css">
 	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/boardList.css" />
     <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
     

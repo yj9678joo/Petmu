@@ -116,7 +116,7 @@
 
 
                <h3 id="join" align="center"  style="padding-right: 373px;">이름</h3>
-               <input   class="input" type="text" maxlength="5" id="userName" name="userName" required="required">
+               <input   class="input" type="text" maxlength="14" id="userName" name="userName" required="required">
 
 
                <h3 id="join" align="center" style="padding-right: 330px;">생년월일</h3>
@@ -223,8 +223,8 @@
     	 var id = $("#userId").val();
     	 var email = $("#email").val();
     	
-    	 var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{5,12}$/;
-    	 var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+    	 var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{4,12}$/;
+    	 var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{7,16}$/;
     	 var emailPattern = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     	 
     	 
@@ -249,8 +249,15 @@
 	 
      $('#idCheck').on('click', function(){
 		
+    	 
+    	 
+    	 
     	 var id = $("#userId").val();
-    	 $.ajax({
+    	 var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{4,12}$/;
+    	 
+    	 
+    	 if(false === idPattern.test(id)) alert('아이디는 5자 이상 12자 이하여야 하며, 특수문자를 포함할수 없습니다.'); 
+    	 else if( $.ajax({
 			 url : '/PetMu/idcheck.do',
 			 type: 'post',
 			 data : { userId : $('#userId').val() },
@@ -265,12 +272,16 @@
 			 }, error : function( code ) {
 				 console.log( code );
 			 }
-		 });
+		 }));
+    	else return;
+ 		event.preventDefault();
 	});
      
      
      
      $('#nicknameCheck').on('click', function(){
+    	 
+    
 		 $.ajax({
 			 url : '/PetMu/nicknamecheck.do',
 			 type: 'post',
@@ -292,6 +303,14 @@
      
      
      $('#emailCheck').on('click', function(){
+    	 
+    	 var email = $("#email").val();
+
+    	 var emailPattern = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    	 
+    	 
+    	 if(false === emailPattern.test(email)) alert('올바른 이메일 형식이 아닙니다.');
+    	 else if(
 		 $.ajax({
 			 url : '/PetMu/emailcheck.do',
 			 type: 'post',
@@ -307,7 +326,9 @@
 			 }, error : function( code ) {
 				 console.log( code );
 			 }
-		 });
+		 }));
+		 else return;
+	 		event.preventDefault();
 	});
      
      

@@ -31,7 +31,7 @@
     <td align="right" colspan="1" style="font-size: 20px; color:gray"><%= m.getNickname() %></td>
 </tr>
     <tr><td colspan="4"><input  class="input" style="width: 300px; height: 35px; font-size: 20px;" type="text" id="nickname" name="nickname" required="required"  maxlength = 8 placeholder=" *변경할 닉네임, 최대 8글자"></td>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;<label id="nicknameCheck"  class="fas fa-check" style="font-size: 30px; color: coral; position: relative; bottom:3px;"></label></td></tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;<label id="nicknameCheck"  class="fas fa-check" style="font-size: 30px; color: coral; position: relative; bottom:3px; cursor: pointer;"></label></td></tr>
 </table>
 </div>
 </form>
@@ -40,7 +40,7 @@
 
 <div class="btns" align="center">
     <br><br><br>
-    <label class="fas fa-sign-in-alt" id="updateBtn" onclick="nicknameUpdate();" style="width: 160px; color: coral; font-size: 30px;">수정완료</label>
+    <label class="fas fa-sign-in-alt" id="updateBtn" onclick="nicknameUpdate();" style="width: 160px; color: coral; font-size: 30px; cursor: pointer;">수정완료</label>
  </div>
 
 <script>

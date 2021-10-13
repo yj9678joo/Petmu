@@ -106,7 +106,7 @@
 	                                </div>
 	                                <%if(m != null && m.getUserId().equals(c.getCwriterId())) { %>
 		                                <span style="font-size: 13px;">
-		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>');"></i> &nbsp;
+		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>', '<%= c.getCdate() %>');"></i> &nbsp;
 		                                    <i class="far fa-trash-alt" id="cmtDel<%= c.getCno() %>"></i>
 		                                </span>
 		                          	<%} %>
@@ -130,12 +130,15 @@
     <%@ include file="/views/common/footer.jsp" %>
 </body>
 
+<!-- 로그인이 돼있을때만 사용가능한 함수  -->
 <%if(m != null) { %>
 	<script>
 	// 댓글 입력 함수
 	
 		function postCmt(){
 			<%-- locatoin.href="<%= request.getContextPath() %>/cmtInsert.co"; --%>
+			
+			// jsondata 형식으로 값을 담아 ajax로 보내기
 			var jsonData = {
 					bno : <%=b.getBno() %>,
 					cwriterId : "<%= m.getUserId() %>", /* m.getUserId */
@@ -143,10 +146,11 @@
 					ccontent : $('#ccontent').val()
 				}
 				
-				//console.log(jsonData); // 전송할 데이터 확인
 				if(!$('#ccontent').val()){
+					// 입력창에 내용이 없으면
 					alert("댓글을 입력해주세요.");
 				} else {
+					// 내용이 들어 있을 때
 					$.ajax({
 						url : "<%= request.getContextPath() %>/cmtInsert.co",
 						type : "post",
@@ -169,7 +173,6 @@
 			var bno = <%= b.getBno() %>;
 			var id = '<%= m.getUserId() %>'; <%-- <%= m.getUserId() %> --%> 
 			
-			console.log(bno, id);
 			
 			if(!confirm("이 게시글을 추천 하시겠습니까?")){
 				// 취소 버튼 클릭시
@@ -181,8 +184,10 @@
 					data : { bno, id },
 					success : function(data){
 						if(data.result == 1){
+							// 처음 추천했다면 화면의 좋아요 개수를 받아온 좋아요 개수로 표현
 							$('.likeCnt').html(data.like);
 						} else {
+							// 중복 좋아요 X 이미 추천했으면 알림창 
 							alert(data.text);
 						}
 					}, error : function(error){
@@ -211,7 +216,7 @@
 	// 댓글 수정 함수
 	
 	// 수정 아이콘 클릭시 수정 댓글창으로 변경
-	function updateCon(cno, nick, content){
+	function updateCon(cno, nick, content, cdate){
 		var htmls = "";
 		
 		htmls += '<div class="cmtUpdate">';
@@ -233,7 +238,9 @@
 		htmls += content;
 		htmls += '</textarea>';
 		htmls += '</div>';
-		htmls += '<div class="upFoot">2021-10-08</div>';
+		htmls += '<div class="upFoot">';
+		htmls += cdate;
+		htmls += '</div>';
 		htmls += '</div>';
 		
 		$('.cmts'+cno).replaceWith(htmls);
@@ -248,9 +255,12 @@
 			}
 			
 			//console.log(jsonData); // 전송할 데이터 확인
+			
 			if(!$('#upCon').val()){
+				// 내용이 없으면
 				alert("댓글을 입력해주세요.");
 			} else {
+				// 있으면 ajax로 보냄
 				$.ajax({
 					url : "<%= request.getContextPath() %>/cmtUpdate.co",
 					type : "post",
@@ -275,6 +285,8 @@
 		        // 취소(아니오) 버튼 클릭 시 이벤트
 		    } else {
 		        // 확인(예) 버튼 클릭 시 이벤트
+		        
+		        // 가장 가까운 div의 cno값
 		        var cno = $(this).closest('div').find('input[name=cno]').val();
 		        
 		    	$.ajax({

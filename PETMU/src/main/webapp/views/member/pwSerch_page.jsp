@@ -96,7 +96,7 @@ padding-top: 20px;
     <input type="password" name = "userPwd" id="userPwd" class="input" placeholder=" 변경하실 새로운 비밀번호를 입력해주세요."><br><br>
     <input type="password" name = "userPwd2" id="userPwd2" class="input" placeholder=" 변경하실 비밀번호 확인"><br> <br><br>
 
-    <span id="changePw" onclick ="pwChange()" >비밀번호 변경하기</span>
+    <span id="changePw" onclick ="pwChange()" style="cursor: pointer;" >비밀번호 변경하기</span>
     <br><br><br><br><br>
 
 </form>

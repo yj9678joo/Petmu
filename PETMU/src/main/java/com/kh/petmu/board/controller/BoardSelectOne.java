@@ -36,10 +36,14 @@ public class BoardSelectOne extends HttpServlet {
 		int cateNo = Integer.parseInt(request.getParameter("cate"));
 		
 		BoardService service = new BoardService();
-
+		
+		// 해당 번호의 게시물 찾아오기
 		Board b = service.selectBoard(bno);
+		
+		// 해당 번호의 게시물 댓글 리스트 받아오기
 		ArrayList<Comment> coList = service.selectCoList(bno);
-
+		
+		// 댓글 총 수
 		int cmtCount = service.getCmtCount(bno);
 		
 		String page = "";
@@ -49,6 +53,7 @@ public class BoardSelectOne extends HttpServlet {
 			request.setAttribute("coList", coList);
 			request.setAttribute("cmtCount", cmtCount);
 			request.setAttribute("cate", cateNo);
+			
 			switch(cateNo) {
 				case 3 : page = "views/board/info_review/hospital/infoDetail.jsp";
 						 break;

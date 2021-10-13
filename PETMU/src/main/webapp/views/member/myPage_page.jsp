@@ -87,13 +87,13 @@ padding-right: 300px;
 <br>
             
 <div style="display:inline-block;">
-            <table align="left">
+            <table align="left" style="display : block;">
 <br><br>
                 <tr>
 
                     <td><h1 style= "color: coral;"><%= m.getNickname() %></h1></td>
 
-                    <td><a href="<%= request.getContextPath()%>/views/member/nicknameUpdate_page.jsp"><label class="far fa-edit" style="color: coral; font-size: 30px;" ></label></a></td>
+                    <td><a href="<%= request.getContextPath()%>/views/member/nicknameUpdate_page.jsp"><label class="far fa-edit" style="color: coral; font-size: 30px; cursor: pointer;" ></label></a></td>
                 </tr>
 
        
@@ -138,9 +138,23 @@ padding-right: 300px;
                 </tr>
                 
                 <tr id="tr">
+                
+                <%
+               
+                String pet;
+                if (m.getPetName() == null) {
+	            pet = "없음"; }
+
+                     else {
+	         pet = m.getPetName();
+	
+            }
+	
+	
+               %>
 
                     <td id="td" style="font-weight: 600;">반려동물 정보</td>
-                    <td id="td" style="color: gray;" >(<%= m.getPetType() %>) <%= m.getPetName() %> </td>
+                    <td id="td" style="color: gray;" >(<%= m.getPetType() %>) |  <%=pet %> </td>
 
                 </tr>
             </table>
@@ -149,8 +163,8 @@ padding-right: 300px;
 <div>
 <table align="right" style="margin-top: 50px;">    
     <tr>
-    <td id="btn"><a href="<%= request.getContextPath()%>/views/member/userUpdate_page.jsp" style="color: coral; text-decoration-line: none;" >개인정보수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td id="btn"><a href="<%= request.getContextPath()%>/views/member/withdraw_page.jsp" style="color: coral; text-decoration-line: none;" >회원탈퇴</a>
+    <td id="btn"><a href="<%= request.getContextPath()%>/views/member/userUpdate_page.jsp" style="color: coral; text-decoration-line: none; cursor: pointer;" >개인정보수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td id="btn"><a href="<%= request.getContextPath()%>/views/member/withdraw_page.jsp" style="color: coral; text-decoration-line: none; cursor: pointer;" >회원탈퇴</a>
 </tr>
 </table>
 </div>
@@ -166,8 +180,8 @@ padding-right: 300px;
                 <table id="listArea" align="center">
                     <thead>
                         <tr>
-                            <th width="100px">No.</th>
-                            <th width="900px">제목</th>
+                            <th width="50px">No.</th>
+                            <th width="700px">제목</th>
                             <th width="500px">카테고리</th>
                             <th width="200px">작성일</th>
                             <th width="200px">조회수</th>
@@ -181,7 +195,7 @@ padding-right: 300px;
                         <tr>
 							<input type="hidden" id="Bno" value="<%=b.getBno() %>" /> <%--bno 받아오기 --%>
 							<input type="hidden" id="CateNo" value="<%=b.getCateNo() %>" /> <%--bno 받아오기 --%>
-                            <td><%=b.getBno() %></td> <%-- bno 받아오기 --%>
+                            <td style="text-align:center"><%=b.getBno() %></td> <%-- bno 받아오기 --%>
                             <td><%=b.getBtitle() %></td> <%--btitle 받아오기 --%>
                             <td align = "center"><%String cateName = "";
                                   switch(b.getCateNo()) {
@@ -235,7 +249,23 @@ $('#listArea td').mouseenter(function(){
      var bno = $(this).parent().find('input[id=Bno]').val();
      var cateNo = $(this).parent().find('input[id=CateNo]').val();
      console.log(bno);
+     
+     if(cateNo >= 3) {
+     
      location.href = "<%= request.getContextPath() %>/selectOne.bo?cate="+ cateNo +"&bno=" + bno;
+     
+     } else if (cateNo == 1) {
+    	 
+
+         location.href = "<%= request.getContextPath() %>/selectOne.fb?&bno=" + bno;
+    	 
+     } else if (cateNo == 2) {
+    	 
+
+    	  location.href = "<%= request.getContextPath() %>/selectOne.tn?&bno=" + bno;
+    	 
+    	 
+     }
      
   });
 

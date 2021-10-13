@@ -15,7 +15,9 @@
 <meta charset="UTF-8">
 <title>PETMU : 잡담게시판</title>
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+<!-- CSS 적용 -->
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/FboardList.css" />
 <!-- 타이틀로고 -->
 <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
@@ -24,142 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<style>
-	.outer{
-		width : 1400px;
-		height : auto;
-		background : white;
-		margin-left : auto;
-		margin-right: auto;
-		padding: 50px;
 
-	}
-	
-	#title {
-		font-weight : bold;
-		margin-left : 35px;
-	}
-	
-	#cateicon { /* 카테고리 아이콘 */
-		font-size: 30px;
-		color: grey;
-		margin-left : 35px;
-	}
-	
-	#likeicon {
-		color : orange;
-	}
-	
-	.category {
-		font-family: 'Jua', sans-serif;
-		margin-top : -30px;
-		font-size : 30px;
-		color : orange;
-	}
-	
-	.tableArea {
-		width : 1300px;
-		height : auto;
-	}
-	
-	    #listArea tbody td:nth-child(2) {
-        text-align: left;
-    }
-	
-	#listArea {
-		margin-left : 35px;
-	}
-	
-	
-	#listArea {
-		width : 1300px;
-		border-collapse : collapse;
-	}
-	
-    #listArea th {
-    	height : 30px;
-        border-top : 3px solid gray;
-        border-bottom : 1px solid lightgray;
-    }
-    
-   	#listArea td {
-   		height : 30px;
-        border-bottom : 1px solid lightgray;
-    }
-    
-    #listArea td:hover {
-    	cursor:pointer;
-    }
-    
-    #listArea i {
-    	color : orange;
-    }
-    
-    .btnArea {
-    	width : 1330px;
-    }
-    
-    #postBtn {
-  		width : 100px;
-		padding : 10px;
-		border : 0;
-		outline: none;
-		color : orange;
-		font-weight: bold;
-		font-size : 15px;
-		margin : auto;
-  		display : block;
-  		text-align: center;
-  		float : right;
-  	}
-  
-  	#postBtn:hover {
-	 	opacity : 0.5;
-     	cursor : pointer;
-	}
-	
-    .pagingArea button {
-    	color : gray;
-    	background : none;
-    	border : none;
-    	font-family: 'Jua', sans-serif;
-    	font-size : 13pt;
-    }
-    
-    .pagingArea button:hover {
-    	color : orange;
-    	cursor: pointer;
-    }
-	
-   	#searchFrm {
-		text-align: center;
-		display : flex;
-		width : 510px;
-		margin-left : auto;
-		margin-right : auto;
-	}
-	
-	#bsearch {
-		width:350px; 
-		height:26px;
-		border :1px solid grey;
-	}
-	
-	select {
-		width:80px; 
-		height:30px;
-		border : 1px solid grey;
-	}
-	
-	#searchBtn {
-	width:60px; 
-	height:32px; 
-	border:0; 
-	font-weight: bold;
-	color : orange;
-	}
-	
-</style>
 </head>
 <body>
 
@@ -193,7 +60,10 @@
 				%>
 				<tr>
 					<td><%= fb.getBno()%></td>
-					<td><%= fb.getbtitle()%></td>
+					<td><%= fb.getbtitle()%>
+					<% if (fb.getBfile() != null) { %>
+						<i style="color : darkgrey;" class="fas fa-paperclip"></i>
+					<% } %></td>
 					<td><%= fb.getbwriterNick()%></td>
 					<td><%= fb.getBdate() %></td>
 					<td><%= fb.getBcount() %></td>
@@ -206,12 +76,12 @@
 		<br />
 		
 		<div class="btnArea" >
-			<%-- <% if ( m != null ) { %> --%> 
+			 <% if ( m != null ) { %>  
 				<button id="postBtn" onclick="location.href='views/freeBoard/boardInsertForm.jsp'">
 					작성하기
 				</button>
 				
-			<%-- <% } %> --%>			
+			 <% } %> 			
 		</div>
 		
 		<br /><br /><br />

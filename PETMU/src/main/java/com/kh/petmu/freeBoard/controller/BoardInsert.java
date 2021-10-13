@@ -67,7 +67,7 @@ public class BoardInsert extends HttpServlet {
 		String bcontent = mre.getParameter("bcontent");
 		
 		// 5-2. 파일 저장 및 정보 처리
-		String filename = mre.getFilesystemName("file");
+		String filename = mre.getFilesystemName("bfile");
 		
 		// 6. 전달받은 값을 서비스로 넘기기
 		freeBoard fb = new freeBoard(bwriterId, bwriterNick, btitle, bcontent, filename);

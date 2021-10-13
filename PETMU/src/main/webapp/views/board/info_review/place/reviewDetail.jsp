@@ -106,7 +106,7 @@
 	                                </div>
 	                                <%if(m != null && m.getUserId().equals(c.getCwriterId())) { %>
 		                                <span style="font-size: 13px;">
-		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>');"></i> &nbsp;
+		                                    <i class="far fa-edit" id="updateCmt" onclick="updateCon('<%= c.getCno() %>', '<%= c.getCwriterNick() %>', '<%= c.getCcontent() %>', '<%= c.getCdate() %>');"></i> &nbsp;
 		                                    <i class="far fa-trash-alt" id="cmtDel<%= c.getCno() %>"></i>
 		                                </span>
 		                          	<%} %>
@@ -233,7 +233,9 @@
 		htmls += content;
 		htmls += '</textarea>';
 		htmls += '</div>';
-		htmls += '<div class="upFoot">2021-10-08</div>';
+		htmls += '<div class="upFoot">';
+		htmls += cdate;
+		htmls += '</div>';
 		htmls += '</div>';
 		
 		$('.cmts'+cno).replaceWith(htmls);

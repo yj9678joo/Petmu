@@ -56,6 +56,8 @@
 </body>
 
 <script>
+
+	// ckEditor5 사용
 	var eidtor
 	ClassicEditor
 	   .create( document.querySelector( '#bcontent' ) )
@@ -68,12 +70,10 @@
 	
 	
 	document.querySelector( '#submitBtn' ).addEventListener( 'click', () => {
-	    var editorData = editor.getData();
+		
+	    var editorData = editor.getData(); // 에디터에 작성된 내용
 	    var btitle = document.querySelector( '#btitle' ).value;
-	    
-	    console.log(btitle);
-	    console.log(editorData);
-	    
+	        
 	    if(!btitle) {
 	    	alert("제목을 입력해 주세요.");
 	    } else if(!editorData) {

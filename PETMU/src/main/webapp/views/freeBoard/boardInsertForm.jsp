@@ -6,96 +6,25 @@
 <meta charset="UTF-8">
 <title>PETMU : 게시글 작성</title>
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+<!-- CSS 적용 -->
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/FboardInsert.css" />
 <!-- 타이틀 로고 -->
 <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/petmu.ico" /> 
 <!-- awesome 아이콘 cdn -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
 <!-- 구글폰트 cdn -->
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- CK클래식 에디터 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-<style>
 
-.outer {
-	width: 1400px;
-	height: auto;
-	background: white;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 50px;
-	margin-top: 40px;
-}
-
-.category {
-	width: 1200px;
-	margin-left: 40px;
-}
-
-i { /* 카테고리 아이콘 */
-	font-size: 24px;
-	color: grey;
-}
-
-#cate { /* 상단 머리글 */
-	font-size: 25px;
-	text-decoration: none;
-}
-
-#btitle {
-	font-size: 20px;
-	width: 1280px;
-	border: 0;
-	border-bottom: 1px solid grey;
-	padding: 10px;
-}
-
-.tableArea {
-	width: 1300px;
-	margin-left: 40px;
-	border: 1px solid lightgrey;
-	padding: 25px 25px 25px 25px;
-}
-
-
-table {
-	padding: 10px;
-}
-
-.ck.ck-editor {
-	max-width : 1300px;
-}
-
-.ck-editor__editable {
-	min-height : 500px;
-}
-
-.btnArea button {
-	width: 100px;
-	padding: 10px;
-	border: 0;
-	outline: none;
-	color: orange;
-	font-weight: bold;
-	font-size: 15px;
-}
-
-.btnArea button:hover {
-	opacity: 0.5;
-	cursor: pointer;
-}
-
-
-</style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
 	
-	<%-- <% if ( m != null ) { %> --%>
+	 <% if ( m != null ) { %>
 	
 		<div class="outer">
 		
@@ -110,7 +39,7 @@ table {
 					  action="<%= request.getContextPath() %>/insert.fb"
 				      method="post" enctype="multipart/form-data">
                 	  <input type="hidden" name="bwriterId" value="<%= m.getUserId() %>" /> <%--m.getid --%>
-                	  <input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" /> <%--m.getid --%>
+                	  <input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" /> <%--m.getNickname --%>
 				      <input type="text" id="btitle" name="btitle" placeholder="제목을 입력해주세요" 
 				      			required maxlength="30"><br>
 
@@ -131,12 +60,7 @@ table {
 			</div>
 		</div>
 	
-	<%-- <% } else { 
-		request.setAttribute("error-msg", "회원만 접근 가능합니다!");
-		
-		request.getRequestDispatcher("../common/errorPage.jsp")
-		       .forward(request, response);
-	 } --%>
+	<% } %>
 	<br />
 	<%@ include file="../common/footer.jsp" %>
 </body>

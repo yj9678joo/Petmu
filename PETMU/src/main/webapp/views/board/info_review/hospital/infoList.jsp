@@ -76,6 +76,7 @@
                 </table>
             </div>
     		<br />
+    		<!-- 총 게시글 수가 페이지 최대 게시글 수 보다 크면 페이징 표시 -->
     		<%if(pi.getListCount() > limit) {%>
 	            <div class="pagingArea" align="center">
 	    			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1&cate=3'"><<</button> <%--cate check --%>

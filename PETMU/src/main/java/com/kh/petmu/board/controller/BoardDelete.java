@@ -38,6 +38,8 @@ public class BoardDelete extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("cate", cateNo);
+			
+			// 각 카테고리별 리스트로 이동
 				switch(cateNo) {
 				case 3 : page = "selectList.bo?cate=3";
 						 break;

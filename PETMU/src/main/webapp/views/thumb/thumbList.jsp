@@ -16,7 +16,9 @@
 <meta charset="UTF-8">
 <title>PETMU : 댕냥자랑</title>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.6.0.min.js"></script>
+<!-- CSS 적용 -->
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/thumbList.css" />
 <!-- 타이틀로고 -->
 <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
@@ -25,153 +27,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<style>
-
-	section {
-		width : 1400px;
-		height : auto;
-		background : white;
-		margin-left : auto;
-		margin-right: auto;
-		padding: 50px;
-
-	}
-	
-	#thumbnailArea {
-		width : 1300px;
-		height : auto;
-		margin-left : auto;
-		margin-right : auto;
-		margin-top : 30px;
-		padding-left : 12px;
-	}
-	
-	.thumb-list {
-		width : 230px;
-		border : 1px solid grey;
-		display : inline-block;
-		margin : 11px;
-		align : center;
-	}
-
-	.thumb-list:hover {
-		opacity : 0.8;
-		cursor : pointer;
-	}
-	
-	ul {
-		width : 200px;
-		list-style : none;
-		text-align : center;
-		/* 블릿기호 없애고 생긴 여백 없애기 */
-		padding-left : 0px;
-		/* 글자수 200px 초과시 안보이게 */
-		overflow : hidden;
-		text-overflow : ellipsis;
-		white-space : nowrap;
-	}
-	
-	#btitle {
-		font-weight : bold;
-	}
-	
-	#cateicon { /* 카테고리 아이콘 */
-	font-size: 40px;
-	color: grey;
-	}
-	
-	.category {
-		font-family: 'Jua', sans-serif;
-		margin-top : -30px;
-		font-size : 50px;
-		color : orange;
-	}
-	
-	#Bhead {
-		text-align: center;
-	}
-	
-	#photoInfo {
-		font-family: 'Jua', sans-serif;
-		text-align : center;
-		margin-top : -8px;
-		font-size : 23px;
-		color : grey;
-	}
-	
-	#btn1 {
-  		width : 100px;
-		padding : 10px;
-		border : 0;
-		outline: none;
-		color : orange;
-		font-weight: bold;
-		font-size : 15px;
-		margin : auto;
-  		display : block;
-  		text-align: center;
-  		float : right;
-	}
-	
-	#btn1:hover {
-  	 	cursor : pointer;
-	}
-	
-    .pagingArea button {
-    	color : gray;
-    	background : none;
-    	border : none;
-    	font-family: 'Jua', sans-serif;
-    	font-size : 13pt;
-    }
-    
-    .pagingArea button:hover {
-    	color : orange;
-    	cursor: pointer;
-    }
-	
-   	#searchFrm {
-		text-align: center;
-		display : flex;
-		width : 510px;
-		margin-left : auto;
-		margin-right : auto;
-	}
-	
-	#bsearch {
-		width:350px; 
-		height:26px;
-		border :1px solid grey;
-	}
-	
-	select {
-		width:80px; 
-		height:30px;
-		border : 1px solid grey;
-	}
-	
-	#searchBtn {
-	width:60px; 
-	height:32px; 
-	border:0; 
-	font-weight: bold;
-	color : orange;
-	}
-	
-	#btn2 {
-		width:60px; 
-		height:35px; 
-		border:0; 
-		font-weight: bold;
-		color : orange;
-	}
-	
-	#btn2:hover {
-		cursor : pointer;
-	}
-
-	
-</style>
 </head>
 <body>
 
@@ -199,7 +54,7 @@
 					
 					<ul>
 						<li id="btitle"><%= thumb.getbtitle() %></li>
-						<li><b><%= thumb.getbwriterNick() %></b>(<%= thumb.getbwriterId() %>)</li>
+						<li><%= thumb.getbwriterNick() %> (<%= thumb.getbwriterId() %>)</li>
 						<li>조회수 <%= thumb.getBcount() %> &nbsp;추천수 <%= thumb.getlikeCount() %></li>
 						<%-- <li><%= thumb.getBdate() + " 조회 " + thumb.getBcount() %></li> --%>
 					</ul>
@@ -208,10 +63,10 @@
 			<% } %>
 			<br><br>
 			
-			<%-- <% if ( m != null ) { %> --%>
+			<% if ( m != null ) { %> 
 			<button id="btn1" onclick="location.href='views/thumb/thumbInsert.jsp'">작성하기</button>
 
-			<%-- <% } %> --%>
+			<% } %> 
 		</div>
 		
 		<br /><br /><br />

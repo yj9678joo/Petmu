@@ -71,7 +71,7 @@ padding-top: 20px;
    </style>
 </head>
 <body  style="background-color:#f5f6f7;">
-    <h2 align="center" style="margin-top: 150px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmu.png"alt="펫뮤" > </a><br><br> ID / PW 찾기 </h2>
+    <h2 align="center" style="margin-top: 150px;"><a href="../../index.jsp"> <img width="250" height="100" src="<%=request.getContextPath()%>/resources/images/petmuT.png"alt="펫뮤" > </a><br><br> ID / PW 찾기 </h2>
     <br><hr><br>
 
 <div style="text-align:center">
@@ -92,7 +92,7 @@ padding-top: 20px;
     
     <br><br><br>
 
-    <label id="findId"  >아이디 찾기</label>
+    <label id="findId" style="cursor: pointer;"  >아이디 찾기</label>
     <br><br><br>
 
 </form>

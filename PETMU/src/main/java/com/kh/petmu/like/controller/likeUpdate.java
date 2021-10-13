@@ -38,6 +38,7 @@ public class likeUpdate extends HttpServlet {
 		
 		likeService service = new likeService();
 		
+		// 해당 게시글에 좋아요를 눌렀는지 db로 확인
 		int result1 = service.selectLike(bno, userId);
 		
 		int like = 0;
@@ -55,7 +56,9 @@ public class likeUpdate extends HttpServlet {
 				int result3 = service.insertLike(bno, userId);
 				
 				if(result3 > 0) {
-
+					
+					// 좋아요 개수와 실행결과 보내주기
+					
 					JSONObject obj = new JSONObject();
 
 					obj.put("like", like);

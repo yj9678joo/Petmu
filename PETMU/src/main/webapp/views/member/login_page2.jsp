@@ -34,14 +34,14 @@
     <label class="fas fa-key" style="font-size: 35px; color: coral; position: relative; top: 4px;" >&nbsp;</label>
     <input class="txtin" type="password" name="userPwd" placeholder=" PASSWORD" onkeyup="enterKet();" style="font-size: 25px;  margin-right: 35px;">
 <br><br><br><br><br>
-<label id="loginBtn" onclick="login()"  class="fas fa-power-off" style="font-size: 25px; margin-left: 40px;"> 로그인 &nbsp;</label>
+<label id="loginBtn" onclick="login()"  class="fas fa-power-off" style="font-size: 25px; margin-left: 40px;cursor: pointer;"> 로그인 &nbsp;</label>
 
 <label style="font-size : 30px; "> | </label>
 
-&nbsp;<label id="memberJoinBtn" onclick="memberJoin()" class="fas fa-sign-in-alt" style="font-size: 25px;"> 회원가입 &nbsp; </label> <br><br><br><br>
-<label id="loginBtn" onclick="idSerch()"   style="font-size: 20px; font-weight: 800; color: gray; margin-left: 26px;"> 아이디 찾기</label>
+&nbsp;<label id="memberJoinBtn" onclick="memberJoin()" class="fas fa-sign-in-alt" style="font-size: 25px;cursor: pointer;"> 회원가입 &nbsp; </label> <br><br><br><br>
+<label id="loginBtn" onclick="idSerch()"   style="font-size: 20px; font-weight: 800; color: gray; margin-left: 26px;cursor: pointer;"> 아이디 찾기</label>
 &nbsp;&nbsp;
-<label id="loginBtn" onclick="pwSerch()"  style="font-size: 20px; font-weight: 800; color: gray;"> 비밀번호 찾기</label>
+<label id="loginBtn" onclick="pwSerch()"  style="font-size: 20px; font-weight: 800; color: gray;cursor: pointer;"> 비밀번호 찾기</label>
 <br /><br /><br /><br /><br />
     </form>
 

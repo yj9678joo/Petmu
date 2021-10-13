@@ -59,7 +59,7 @@
    <table align="center" style="width: 300px; padding-left: 42px;">
    <tr>
 <td colspan="2" id="val">아이디</td>
-<td colspan="2" class="value">jminsu22</td>
+<td colspan="2" class="value"><%= m.getUserId() %></td>
 
 
    </tr>
@@ -115,7 +115,7 @@
       </tr>
       <tr><td colspan="4"><input type="text" id="zipCode" name="zipCode" class="input"></td>
       
-         <td><div class="fas fa-search-location" style="font-size: 30px; color: coral; position: relative; left: 22px; bottom:0px;" id="ckZip"  onclick="addrSearch();"></div></td>
+         <td><div class="fas fa-search-location" style="font-size: 30px; color: coral; position: relative; left: 22px; bottom:0px; cursor: pointer;" id="ckZip"  onclick="addrSearch();"></div></td>
       </tr>
 
       <tr><td colspan="4"><br><input  class="input" type="text" id="address1" name="address1"></td></tr>
@@ -128,10 +128,10 @@
 <br>
 
 <h3 style="font-weight: 500;" >애완동물을 기르고 계신가요?</h3>
-<input type="checkbox" name="petType" id="petType" value="강아지"> 강아지 &nbsp;
-<input type="checkbox" name="petType" id="petType" value="고양이"> 고양이 &nbsp;
-<input type="checkbox" name="petType" id="petType" value="기타"> 기타 &nbsp;
-<input type="checkbox" name="petType" id="petType" value="없음"> 없음 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="강아지" style ="cursor: pointer;"> 강아지 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="고양이" style ="cursor: pointer;"> 고양이 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="기타" style ="cursor: pointer;"> 기타 &nbsp;
+<input type="checkbox" name="petType" id="petType" value="없음" style ="cursor: pointer;"> 없음 &nbsp;
  <br><br>
 <label style="font-size: 18px;">반려동물명 : </label> <input type="text" name="petName" value="" placeholder=" 직접 입력해주세요!" style="width: 200px; height: 35px; font-size: 18px;"> 
 
@@ -140,7 +140,7 @@
  
   <div class="btns" align="center">
    <br><br><br>
-   <label class="fas fa-sign-in-alt" id="updateBtn" onclick="updateMember();" style="width: 160px; color: coral; font-size: 30px;">수정완료</label>
+   <label class="fas fa-sign-in-alt" id="updateBtn" onclick="updateMember();" style="width: 160px; color: coral; font-size: 30px; cursor: pointer;">수정완료</label>
 </div>
 
 </form>
