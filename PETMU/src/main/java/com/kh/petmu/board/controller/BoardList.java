@@ -91,6 +91,8 @@ public class BoardList extends HttpServlet {
 		
 		// -------------------------페이지 처리 끝----------------------------------- //
 		
+
+		
 		// 게시글 리스트 가져오기
 		if(target == null && keyword == null) {
 			// 검색하지 않았을 때

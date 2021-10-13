@@ -11,13 +11,21 @@ public class CommentService {
 	Connection con;
 	CommentDAO dao = new CommentDAO();
 	
-	public int insertComment(Comment co) {
+	public int insertComment(Comment co, int bno) {
 		con = getConnection();
 		
 		int result = dao.insertComment(con, co);
 		
 		if(result > 0) {
-			commit(con);
+			
+			int result2 = dao.updateCmtCount(con, bno);
+			
+			if(result2 > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}	
+			
 		} else {
 			rollback(con);
 		}

@@ -91,6 +91,7 @@ public class BoardDAO {
 				b.setLikeCount(rs.getInt("likecount"));
 				b.setBdate(rs.getDate("bdate"));
 				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
 
 				list.add(b);
 				
@@ -134,6 +135,7 @@ public class BoardDAO {
 				b.setLikeCount(rs.getInt("likecount"));
 				b.setBdate(rs.getDate("bdate"));
 				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
 								
 			}
 			
@@ -428,6 +430,7 @@ public class BoardDAO {
 				b.setLikeCount(rs.getInt("likecount"));
 				b.setBdate(rs.getDate("bdate"));
 				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
 
 				list.add(b);
 				
@@ -479,6 +482,7 @@ public class BoardDAO {
 				b.setLikeCount(rs.getInt("likecount"));
 				b.setBdate(rs.getDate("bdate"));
 				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
 
 				list.add(b);
 				
@@ -530,6 +534,7 @@ public class BoardDAO {
 				b.setLikeCount(rs.getInt("likecount"));
 				b.setBdate(rs.getDate("bdate"));
 				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
 
 				list.add(b);
 				

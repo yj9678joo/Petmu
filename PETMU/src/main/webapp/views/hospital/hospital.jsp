@@ -4,12 +4,22 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>다음 지도 API</title>
+	<title>PETMU : 우리동네 동물병원</title>
+	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
+	<!-- 타이틀 로고 -->
+	<link rel="shortcut icon" type="image/x-icon"
+		href="<%= request.getContextPath()%>/resources/images/petmu.ico" />
 </head>
 
 <body>
-	<div id="map" style="width:100%;height:100vh;"></div>
+	<%@ include file="../common/header.jsp"%>
+	
 
+	<div id="map" style="width:1400px; height:100vh; margin-left: auto; margin-right: auto;"></div>
+
+	
+	<%@ include file="../common/footer.jsp"%>
+	
 	<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=b4a3224018a731e11156b2e5e5ca437e&libraries=clusterer"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

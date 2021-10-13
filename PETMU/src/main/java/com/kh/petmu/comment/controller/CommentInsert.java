@@ -49,7 +49,7 @@ public class CommentInsert extends HttpServlet {
 		// 서비스로 보내기
 		CommentService service = new CommentService();
 		
-		int result = service.insertComment(co);
+		int result = service.insertComment(co, bno);
 		
 		if(result > 0) {
 			response.getWriter().print(result);

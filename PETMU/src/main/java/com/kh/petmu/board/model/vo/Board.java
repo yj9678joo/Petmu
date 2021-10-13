@@ -21,13 +21,14 @@ public class Board implements Serializable{
 	private int likeCount;   
 	private Date bdate;       
 	private String status;
+	private int ccount;
 	
 	
 	public Board() {}
 
 
 	public Board(int bno, int cateNo, String bwriterId, String bwriterNick, String btitle, String bcontent, int bcount,
-			String bfile, int likeCount, Date bdate, String status) {
+			String bfile, int likeCount, Date bdate, String status, int ccount) {
 		super();
 		this.bno = bno;
 		this.cateNo = cateNo;
@@ -40,6 +41,7 @@ public class Board implements Serializable{
 		this.likeCount = likeCount;
 		this.bdate = bdate;
 		this.status = status;
+		this.ccount = ccount;
 	}
 
 
@@ -53,11 +55,21 @@ public class Board implements Serializable{
 
 	
 
+	public int getCcount() {
+		return ccount;
+	}
+
+
+	public void setCcount(int ccount) {
+		this.ccount = ccount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [bno=" + bno + ", cateNo=" + cateNo + ", bwriterId=" + bwriterId + ", bwriterNick=" + bwriterNick
 				+ ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcount=" + bcount + ", bfile=" + bfile
-				+ ", likeCount=" + likeCount + ", bdate=" + bdate + ", status=" + status + "]";
+				+ ", likeCount=" + likeCount + ", bdate=" + bdate + ", status=" + status + ", ccount=" + ccount + "]";
 	}
 
 

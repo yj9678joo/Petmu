@@ -65,11 +65,15 @@
                         <tr>
 							<input type="hidden" value="<%=b.getBno() %>" /> <%--bno 받아오기 --%>
                             <td><%=b.getBno() %></td> <%-- bno 받아오기 --%>
+                            <%if(b.getCcount() != 0) {%>
+                            <td><%=b.getBtitle() %> <label style="color : tomato; font-weight: bold;">[<%=b.getCcount() %>]</label></td> <%--btitle 받아오기 --%>
+                            <%} else { %>
                             <td><%=b.getBtitle() %></td> <%--btitle 받아오기 --%>
+                            <%}%>
                             <td><%=b.getBwriterNick() %></td> <%--userNickname 받아오기 --%>
                             <td><%=b.getBdate() %></td> <%--uploadDate 받아오기 --%>
-                            <td><%=b.getBcount()%></td> <%-- likeCount 받아오기 --%>
-                            <td><i class="fas fa-thumbs-up"></i> + <%=b.getLikeCount() %></td>                        
+                            <td><%=b.getBcount()%></td> 
+                            <td><i class="fas fa-thumbs-up"></i> + <%=b.getLikeCount() %></td>  <%-- likeCount 받아오기 --%>                       
                         </tr>
                         <%}%>
                     </tbody>
