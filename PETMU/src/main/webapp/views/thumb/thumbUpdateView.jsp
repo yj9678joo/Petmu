@@ -20,7 +20,7 @@
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <!-- CSS 적용 -->
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/thumbUpdates.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/thumbUpdate.css" />
 <!-- 타이틀로고 -->
 <link rel="shortcut icon" type="image/x-icon" href="<%= request.getContextPath() %>/resources/images/petmu.ico" /> 
 <!-- fontawesome 아이콘cdn -->
