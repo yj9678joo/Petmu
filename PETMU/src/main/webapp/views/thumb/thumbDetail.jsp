@@ -44,7 +44,7 @@
 		<br>
 		<div class="category">
 			<i id="cateIcon" class="far fa-edit"></i> 
-			<a href='<%= request.getContextPath() %>/selectList.tn'>우리 댕냥 자랑</a><br><br> 
+			<a href='<%= request.getContextPath() %>/selectList.tn'>나의 댕냥 자랑</a><br><br> 
 		</div>
 		
 		<div class="tableArea">
@@ -161,11 +161,15 @@
 		
 		<p id="content" ><%= t.getBcontent() %></p>
 		
+		<br /><br />
+		
 			<div id="likeArea" align="center">
 				<span id="likeBtn"> <i class="fas fa-thumbs-up"></i> 
 					<span class="likeCnt"><%=t.getlikeCount()%> Like</span> <%--likecount 가져오기 --%>
 				</span>
 			</div>
+			
+		<br />
 			
 			<br />
 		<div id="btnArea">
@@ -175,7 +179,7 @@
 		<button id="deleteBtn" onclick="deleteOk();">삭제</button>
 		<% } %> 
 		</div>
-		<br /><br />
+		<br />
 		
 		<br /><hr />
 
@@ -206,11 +210,12 @@
 									value="<%=c.getCwriterId()%>" />
 							</div>
 							<%--usernickname과 cwriter 일치하면 보이기 --%>
-							<span style="font-size: 13px;"> <i class="far fa-edit"
-								id="updateCmt"
-								onclick="updateCon('<%=c.getCno()%>', '<%=c.getCwriterNick()%>', '<%=c.getCcontent()%>');"></i>
-								&nbsp; <i class="far fa-trash-alt" id="deleteCmt"></i>
+							<%if(m != null && m.getUserId().equals(c.getCwriterId())) { %>
+							<span style="font-size: 13px;"> 
+							<i class="far fa-edit" id="updateCmt" onclick="updateCon('<%=c.getCno()%>', '<%=c.getCwriterNick()%>', '<%=c.getCcontent()%>');"></i>
+					 &nbsp; <i class="far fa-trash-alt" id="deleteCmt"></i>
 							</span>
+							<%} %>
 						</div>
 						<br />
 						<div class="cmtBody" style="font-size: 14px;">
@@ -244,17 +249,19 @@
 	// 댓글 입력 함수
 	
 		function postCmt(){
-			<%-- locatoin.href="<%= request.getContextPath() %>/cmtInsert.co"; --%>
+			// jsondata 형식으로 값을 담아 ajax로 보내기
 			var jsonData = {
 					bno : <%=t.getBno() %>,
 					cwriterId : "<%= m.getUserId() %>", /* m.getUserId */
 					cwriterNick : "<%= m.getNickname()%>", /* m.getnickname */
 					ccontent : $('#ccontent').val()
 				}
-				
 				//console.log(jsonData); // 전송할 데이터 확인
+				
 				if(!$('#ccontent').val()){
+					// 입력창에 내용이 없으면
 					alert("댓글을 입력해주세요.");
+					// 내용이 있다면
 				} else {
 					$.ajax({
 						url : "<%= request.getContextPath() %>/cmtInsert.co",
@@ -385,28 +392,33 @@ function sendCon() {
 }
 		
 // 댓글 삭제 함수
-$('#deleteCmt').click(function(){
-	if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
-        // 취소(아니오) 버튼 클릭 시 이벤트
-    } else {
-        // 확인(예) 버튼 클릭 시 이벤트
-        var cno = $(this).closest('div').find('input[name=cno]').val();
-        
-    	$.ajax({
-			url : "<%= request.getContextPath() %>/cmtDelete.co",
-			type : "post",
-			data : { cno },
-			success : function(data){
-				if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
-					document.location.reload();
-				}
-			}, error : function(error){
-				alert("댓글 삭제 실패");
-			}
-			
-		});        
-    }
-});
+	$('i[id*=deleteCmt]').click(
+		function (){
+			if (!confirm("삭제시 복구 할 수 없습니다. 삭제하시겠습니까?")) {
+		        // 취소(아니오) 버튼 클릭 시 이벤트
+		    } else {
+		        // 확인(예) 버튼 클릭 시 이벤트
+		        
+		        // 가장 가까운 div의 cno값
+		        var cno = $(this).closest('div').find('input[name=cno]').val();
+		        var bno = <%= t.getBno() %>;
+		        
+		    	$.ajax({
+					url : "<%= request.getContextPath() %>/cmtDelete.co",
+					type : "post",
+					data : { cno, bno },
+					success : function(data){
+						if(data == 1){ // 데이터 처리가 성공적으로 완료되면 페이지 새로고침
+							document.location.reload();
+						}
+					}, error : function(error){
+						alert("댓글 삭제 실패");
+					}
+					
+				});        
+		    }
+		}
+	);
 
 </script>
 </html>

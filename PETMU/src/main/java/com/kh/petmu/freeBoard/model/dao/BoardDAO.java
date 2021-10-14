@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.petmu.board.model.vo.Board;
 import com.kh.petmu.comment.model.vo.Comment;
 import com.kh.petmu.freeBoard.model.vo.freeBoard;
 
@@ -88,7 +87,8 @@ public class BoardDAO {
 				fb.setBfile( rs.getString("bfile"));
 				fb.setlikeCount( rs.getInt("likeCount"));
 				fb.setBdate( rs.getDate("bdate"));
-				fb.setStatus(rs.getString("status"));	
+				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
 				
 				list.add(fb);
 			}
@@ -135,6 +135,7 @@ public class BoardDAO {
 				fb.setlikeCount( rs.getInt("likeCount"));
 				fb.setBdate( rs.getDate("bdate"));	
 				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
 			}
 			
 		} catch (SQLException e) {
@@ -184,10 +185,9 @@ public class BoardDAO {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, fb.getbwriterId());
-			ps.setString(2, fb.getbwriterNick());
-			ps.setString(3, fb.getbtitle());
-			ps.setString(4, fb.getBcontent());
-			ps.setString(5, fb.getBfile());
+			ps.setString(2, fb.getbtitle());
+			ps.setString(3, fb.getBcontent());
+			ps.setString(4, fb.getBfile());
 			
 			result = ps.executeUpdate();
 			
@@ -430,6 +430,7 @@ public class BoardDAO {
 				fb.setlikeCount( rs.getInt("likeCount"));
 				fb.setBdate( rs.getDate("bdate"));	
 				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
 				
 				list.add(fb);
 			}
@@ -477,6 +478,7 @@ public class BoardDAO {
 				fb.setlikeCount( rs.getInt("likeCount"));
 				fb.setBdate( rs.getDate("bdate"));	
 				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
 				
 				list.add(fb);
 			}
@@ -524,6 +526,101 @@ public class BoardDAO {
 				fb.setlikeCount( rs.getInt("likeCount"));
 				fb.setBdate( rs.getDate("bdate"));	
 				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
+				
+				list.add(fb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectListSortcmt(Connection con, int currentPage, int limit) {
+		ArrayList<freeBoard> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListcmt");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, endRow);
+			ps.setInt(2, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				freeBoard fb = new freeBoard();
+				
+				fb.setBno( rs.getInt("bno"));
+				fb.setcateNo( rs.getInt("cate_No"));
+				fb.setbwriterId( rs.getString("bwriter_Id"));
+				fb.setbwriterNick( rs.getString("bwriter_Nick"));
+				fb.setbtitle( rs.getString("btitle"));
+				fb.setBcontent( rs.getString("bcontent"));
+				fb.setBcount( rs.getInt("bcount"));
+				fb.setBfile( rs.getString("bfile"));
+				fb.setlikeCount( rs.getInt("likeCount"));
+				fb.setBdate( rs.getDate("bdate"));	
+				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
+				
+				list.add(fb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<freeBoard> selectListSortlike(Connection con, int currentPage, int limit) {
+		ArrayList<freeBoard> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListSortlike");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, endRow);
+			ps.setInt(2, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				freeBoard fb = new freeBoard();
+				
+				fb.setBno( rs.getInt("bno"));
+				fb.setcateNo( rs.getInt("cate_No"));
+				fb.setbwriterId( rs.getString("bwriter_Id"));
+				fb.setbwriterNick( rs.getString("bwriter_Nick"));
+				fb.setbtitle( rs.getString("btitle"));
+				fb.setBcontent( rs.getString("bcontent"));
+				fb.setBcount( rs.getInt("bcount"));
+				fb.setBfile( rs.getString("bfile"));
+				fb.setlikeCount( rs.getInt("likeCount"));
+				fb.setBdate( rs.getDate("bdate"));	
+				fb.setStatus(rs.getString("status"));
+				fb.setCcount( rs.getInt("ccount"));
 				
 				list.add(fb);
 			}
@@ -544,14 +641,5 @@ public class BoardDAO {
 
 
 }
-
-
-
-
-
-
-
-
-
 
 

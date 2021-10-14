@@ -24,9 +24,9 @@
 <!-- fontawesome 아이콘cdn -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" /> 
 <!-- 구글폰트 cdn -->
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -36,13 +36,22 @@
 		<br>
 		<div id="Bhead">
 		<i id="cateIcon" class="far fa-images"></i>
-		<label class="category"> 우리 댕냥 자랑</label>
+		<label class="category"> 나의 댕냥 자랑</label>
 		<p id="photoInfo">
 			반려동물의 모습을 사진으로 자랑하세요!
 		</p>
 		</div>
+		
+		<div align="right" style="width: 1340px; padding-bottom: 5px;">
+			<select name="sortList" id="sortList">
+				<option value="">:::정렬:::</option>
+				<option ${(param.sort == "new") ? "selected" : " " } value="new">최신순</option>
+				<option ${(param.sort == "cmt") ? "selected" : " " } value="cmt">댓글순</option>
+				<option ${(param.sort == "like") ? "selected" : " " } value="like">추천순</option>
+			</select>
+		</div>
+		
 		<hr />
-		<br />
 		<div id="thumbnailArea">
 			<% for(Thumbnail thumb : list) { %>
 				<div class="thumb-list" align="center">
@@ -54,9 +63,14 @@
 					
 					<ul>
 						<li id="btitle"><%= thumb.getbtitle() %></li>
+
 						<li><%= thumb.getbwriterNick() %> (<%= thumb.getbwriterId() %>)</li>
-						<li>조회수 <%= thumb.getBcount() %> &nbsp;추천수 <%= thumb.getlikeCount() %></li>
-						<%-- <li><%= thumb.getBdate() + " 조회 " + thumb.getBcount() %></li> --%>
+						<li>
+		                     <i style="color:darkgrey" class="far fa-eye"></i> <%= thumb.getBcount() %>&nbsp;&nbsp;&nbsp;
+		                     <i style="color:orange;" class="fas fa-thumbs-up"></i> <%= thumb.getlikeCount() %>&nbsp;&nbsp;&nbsp;
+		                     <i style="color:darkgrey;" class="far fa-comment-dots"></i> <%= thumb.getCcount() %>   
+                 		</li>
+
 					</ul>
 				</div>
 							
@@ -150,5 +164,21 @@ function search(){
 		location.href = "<%= request.getContextPath()%>/selectList.tn?searchTarget=" + target + "&keyword=" + keyword;
 	}
 }
+
+// 게시글 정렬
+$('#sortList').on('change', function(){
+	var sortL = $(this).val();
+	
+	switch(sortL){
+	
+	case "new" : location.href = "<%= request.getContextPath()%>/selectList.tn";
+				 break;
+	case "cmt" : location.href = "<%= request.getContextPath()%>/selectSortList.tn?sort=" + sortL;
+				   break;
+	case "like" : location.href = "<%= request.getContextPath()%>/selectSortList.tn?&sort=" + sortL;
+	   			   break;
+	}
+	
+});
 </script>
 </html>

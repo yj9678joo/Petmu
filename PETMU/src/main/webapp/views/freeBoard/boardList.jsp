@@ -8,12 +8,13 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PETMU : 잡담게시판</title>
+<title>PETMU : 자유게시판</title>
 <script src="<%= request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <!-- CSS 적용 -->
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/header.css" />
@@ -36,11 +37,19 @@
 		<br>
 		<div id="Bhead">
 		<i id="cateicon" class="far fa-edit"></i>
-		<label class="category">잡담게시판</label>	
+		<label class="category">자유게시판</label>	
 		</div>
-		
-		<br>
-		
+
+		<div align="right" style="width: 1340px; padding-bottom: 5px;">
+			<select name="sortList" id="sortList">
+				<option value="">:::정렬:::</option>
+				<option ${(param.sort == "new") ? "selected" : " " } value="new">최신순</option>
+				<option ${(param.sort == "cmt") ? "selected" : " " } value="cmt">댓글순</option>
+				<option ${(param.sort == "like") ? "selected" : " " } value="like">추천순</option>
+			</select>
+		</div>
+
+
 		<div class="tableArea">
 			<table id="listArea" >
 				<thead>
@@ -63,6 +72,9 @@
 					<td><%= fb.getbtitle()%>
 					<% if (fb.getBfile() != null) { %>
 						<i style="color : darkgrey;" class="fas fa-paperclip"></i>
+					<% } %>
+					<% if ( fb.getCcount() != 0 ) { %>
+					<b style="color:tomato">[<%= fb.getCcount() %>]</b>
 					<% } %></td>
 					<td><%= fb.getbwriterNick()%></td>
 					<td><%= fb.getBdate() %></td>
@@ -143,38 +155,54 @@
 
 </body>
 
-<script>
-// 게시글 리스트 마우스이벤트, 작성하기 버튼 함수
-$(function(){
-	$('#listArea td').mouseenter(function(){
-		$(this).parent().css({"background" : "#f2f2f2", "cursor" : "pointer"});
-	}).mouseout(function(){
-		$(this).parent().css({"background" : "white"});
-	}).click(function(){
-		var bno = $(this).parent().find('td:first').html();
-		location.href = "<%= request.getContextPath() %>/selectOne.fb?bno=" + bno;
+	<script>
+	// 게시글 리스트 마우스이벤트, 작성하기 버튼 함수
+	$(function(){
+		$('#listArea td').mouseenter(function(){
+			$(this).parent().css({"background" : "#f2f2f2", "cursor" : "pointer"});
+		}).mouseout(function(){
+			$(this).parent().css({"background" : "white"});
+		}).click(function(){
+			var bno = $(this).parent().find('td:first').html();
+			location.href = "<%= request.getContextPath() %>/selectOne.fb?bno=" + bno;
+		});
 	});
-});
-/* -- 질문했었던 부분
-	위에 테이블 tr>td 안에 input type="hidden"으로 bno를 받아오면 
-	var bno = $(this).parent().find('input').val();
-	내 코드에선 input type="hidden"을 안쓰고 tr>td 안에서 바로 bno값을 받았기때문에
-	var bno = $(this).parent().find('td:first').html(); 라고 써서
-	부모인 tr 밑에 첫번째 td 값을 가져오는 것
-*/
-
-// 검색 기능
-function search(){
-	var target = $('#searchTarget').val();
-	var keyword = $('#bsearch').val();
+	/* -- 질문했었던 부분
+		위에 테이블 tr>td 안에 input type="hidden"으로 bno를 받아오면 
+		var bno = $(this).parent().find('input').val();
+		내 코드에선 input type="hidden"을 안쓰고 tr>td 안에서 바로 bno값을 받았기때문에
+		var bno = $(this).parent().find('td:first').html(); 라고 써서
+		부모인 tr 밑에 첫번째 td 값을 가져오는 것
+	*/
 	
-	console.log(keyword);
-	
-	if(!keyword){
-		alert("검색어를 입력해주세요.")
-	} else {
-		location.href = "<%= request.getContextPath()%>/selectList.fb?searchTarget=" + target + "&keyword=" + keyword;
+	// 검색 기능
+	function search(){
+		var target = $('#searchTarget').val();
+		var keyword = $('#bsearch').val();
+		
+		console.log(keyword);
+		
+		if(!keyword){
+			alert("검색어를 입력해주세요.")
+		} else {
+			location.href = "<%= request.getContextPath()%>/selectList.fb?searchTarget=" + target + "&keyword=" + keyword;
+		}
 	}
-}
+		
+	// 게시글 정렬
+	$('#sortList').on('change', function(){
+		var sortL = $(this).val();
+		
+		switch(sortL){
+		
+		case "new" : location.href = "<%= request.getContextPath()%>/selectList.fb";
+					 break;
+		case "cmt" : location.href = "<%= request.getContextPath()%>/selectSortList.fb?sort=" + sortL;
+					   break;
+		case "like" : location.href = "<%= request.getContextPath()%>/selectSortList.fb?&sort=" + sortL;
+		   			   break;
+		}
+		
+	});
 </script>
 </html>

@@ -40,7 +40,7 @@
         <!-- 게시글 추가 영역 -->
         <input type="hidden" name="bwriterId" value="<%= m.getUserId() %>" />
         <input type="hidden" name="bwriterNick" value="<%= m.getNickname() %>" />
-        <input id="btitle" type="text" name="btitle" placeholder="제목을 입력해주세요" required maxlength="30"><br><br>
+        <input id="btitle" type="text" name="btitle" placeholder="제목을 입력해주세요" required maxlength="50"><br><br>
         <textarea name="bcontent" id="bcontent"></textarea>
     <br />
     <table> 

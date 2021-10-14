@@ -33,6 +33,7 @@ header {
 	display: flex;
 	font-weight: bold;
 	font-size: X-large;
+	padding : 5px;
 }
 
 .menu {
