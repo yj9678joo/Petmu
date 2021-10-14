@@ -121,9 +121,8 @@ public class ThumbnailDAO {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1, t.getbwriterId());
-			ps.setString(2, t.getbwriterNick());
-			ps.setString(3, t.getbtitle());
-			ps.setString(4, t.getBcontent());
+			ps.setString(2, t.getbtitle());
+			ps.setString(3, t.getBcontent());
 			
 			result = ps.executeUpdate();
 			

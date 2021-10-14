@@ -45,7 +45,15 @@
            		<i class="far fa-edit"></i>
                 <label style="color : orange;"> 병원 / 약국 정보 공유</label>
             </div>
-    
+    		
+    		<div align="right" style="width:1162px; padding-bottom : 5px;">
+    			<select name="sortList" id="sortList">
+    				<option  ${(param.sort == "new") ? "selected" : " " }value="new">최신순</option>
+    				<option  ${(param.sort == "cmt") ? "selected" : " " }value="cmt">댓글순</option>
+    				<option  ${(param.sort == "like") ? "selected" : " " }value="like">추천순</option>
+    			</select>
+    		</div>
+    		
             <div class="tableArea">
                 <table id="listArea">
                     <thead>
@@ -115,7 +123,7 @@
             </div>
         </div>
 
-       	<div id="searchArea">
+      	<div id="searchArea">
 			<div id="searchFrm">
 				<select id="searchTarget" name="searchTarget">
 					<option ${(param.searchTarget == "title") ? "selected" : " " }value="title">제목</option>
@@ -163,6 +171,25 @@
     			location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3&searchTarget=" + target + "&keyword=" + keyword; <%--cate check --%>
     		}
     	}
+    	
+    	
+    	// 게시글 정렬
+    	$('#sortList').on('change', function(){
+    		var sortL = $(this).val();
+    		
+    		switch(sortL){
+    		
+    		case "new" : location.href = "<%= request.getContextPath()%>/selectList.bo?cate=3";
+    					 break;
+    		case "like" : location.href = "<%= request.getContextPath()%>/selectSortList.bo?cate=3&sort=" + sortL;
+						   break;
+    		case "cmt" : location.href = "<%= request.getContextPath()%>/selectSortList.bo?cate=3&sort=" + sortL;
+			   			   break;
+    		}
+    		
+    	});
+    	
+    	
     </script>
 </html>
 

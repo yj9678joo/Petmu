@@ -192,8 +192,25 @@ public class BoardService {
 		return list;
 	}
 
+	public ArrayList<Board> selectListSortcmt(int cateNo, int currentPage, int limit) {
+		con = getConnection();
+		
+		ArrayList<Board> list = dao.selectListSortcmt(con, cateNo, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
 
-
+	public ArrayList<Board> selectListSortlike(int cateNo, int currentPage, int limit) {
+		con = getConnection();
+		
+		ArrayList<Board> list = dao.selectListSortlike(con, cateNo, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
 
 	
 	
@@ -218,6 +235,7 @@ public class BoardService {
 	      
 	      return result;
    }
+
 
 
 

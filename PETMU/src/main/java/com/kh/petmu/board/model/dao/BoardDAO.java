@@ -249,9 +249,8 @@ public class BoardDAO {
 			
 			ps.setInt(1, b.getCateNo());
 			ps.setString(2, b.getBwriterId());
-			ps.setString(3, b.getBwriterNick());
-			ps.setString(4, b.getBtitle());
-			ps.setString(5, b.getBcontent());
+			ps.setString(3, b.getBtitle());
+			ps.setString(4, b.getBcontent());
 			
 			result = ps.executeUpdate();
 			
@@ -551,7 +550,108 @@ public class BoardDAO {
 		return list;
 	}
 
+
+	public ArrayList<Board> selectListSortcmt(Connection con, int cateNo, int currentPage, int limit) {
+		ArrayList<Board> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListcmt");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, cateNo);
+			ps.setInt(2, endRow);
+			ps.setInt(3, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				
+				b.setBno(rs.getInt("bno"));
+				b.setCateNo(rs.getInt("cate_no"));
+				b.setBwriterId(rs.getString("bwriter_id"));
+				b.setBwriterNick(rs.getString("bwriter_nick"));
+				b.setBtitle(rs.getString("btitle"));
+				b.setBcontent(rs.getString("bcontent"));
+				b.setBcount(rs.getInt("bcount"));
+				b.setBfile(rs.getString("bfile"));
+				b.setLikeCount(rs.getInt("likecount"));
+				b.setBdate(rs.getDate("bdate"));
+				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
+
+				list.add(b);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		
+		return list;
+	}
+	   
 	
+	public ArrayList<Board> selectListSortlike(Connection con, int cateNo, int currentPage, int limit) {
+		ArrayList<Board> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectListSortlike");
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			ps.setInt(1, cateNo);
+			ps.setInt(2, endRow);
+			ps.setInt(3, startRow);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Board b = new Board();
+				
+				b.setBno(rs.getInt("bno"));
+				b.setCateNo(rs.getInt("cate_no"));
+				b.setBwriterId(rs.getString("bwriter_id"));
+				b.setBwriterNick(rs.getString("bwriter_nick"));
+				b.setBtitle(rs.getString("btitle"));
+				b.setBcontent(rs.getString("bcontent"));
+				b.setBcount(rs.getInt("bcount"));
+				b.setBfile(rs.getString("bfile"));
+				b.setLikeCount(rs.getInt("likecount"));
+				b.setBdate(rs.getDate("bdate"));
+				b.setStatus(rs.getString("status"));
+				b.setCcount(rs.getInt("ccount"));
+
+				list.add(b);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		
+		return list;
+	}
+	   
 	
 	
 	
@@ -636,7 +736,7 @@ public class BoardDAO {
 		      
 		      return list;
 		   }
-	   
+
 	
 	
 	

@@ -37,8 +37,7 @@ public class CommentDAO {
 			
 			ps.setInt(1, co.getBno());
 			ps.setString(2, co.getCwriterId());
-			ps.setString(3, co.getCwriterNick());
-			ps.setString(4, co.getCcontent());
+			ps.setString(3, co.getCcontent());
 			
 			result = ps.executeUpdate();
 			
