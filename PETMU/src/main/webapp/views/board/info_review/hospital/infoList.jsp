@@ -48,6 +48,7 @@
     		
     		<div align="right" style="width:1162px; padding-bottom : 5px;">
     			<select name="sortList" id="sortList">
+    				<option value="">:::정렬:::</option>
     				<option  ${(param.sort == "new") ? "selected" : " " }value="new">최신순</option>
     				<option  ${(param.sort == "cmt") ? "selected" : " " }value="cmt">댓글순</option>
     				<option  ${(param.sort == "like") ? "selected" : " " }value="like">추천순</option>
